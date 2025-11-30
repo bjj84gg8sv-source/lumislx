@@ -6,7 +6,7 @@ html,body { height: 100%; margin: 0; font-family: Arial, Helvetica, sans-serif; 
 /* Load Diamonds font */
 @font-face {
   font-family: 'LookinDiamonds';
-  src: url('assets/Lookin-\' Like Diamonds.ttf') format('truetype');
+  src: url('Assets/Lookin-\' Like Diamonds.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -61,7 +61,7 @@ html,body { height: 100%; margin: 0; font-family: Arial, Helvetica, sans-serif; 
 /* Load custom font placed in public/assets */
 @font-face {
   font-family: 'AngstromCustom';
-  src: url('assets/angstrom.ttf') format('truetype');
+  src: url('Assets/angstrom.ttf') format('truetype');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
