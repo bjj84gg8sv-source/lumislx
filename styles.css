@@ -144,7 +144,6 @@ html,body { height: 100%; margin: 0; font-family: Arial, Helvetica, sans-serif; 
   width: 100%;
   height: 100vh;
   z-index: 1;
-  padding-top: 60px;
 }
 
 /* Gallery scrolls over hero and fades in */
@@ -386,19 +385,23 @@ body.lighting-page {
 }
 
 .strip {
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .bard {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0.05));
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(255, 255, 255, 0.15));
 }
 
 .lighting-content {
   position: relative;
   z-index: 5;
   padding: 80px 40px 60px 40px;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
+}
+
+body.lighting-page .lighting-content {
+  padding-top: 40px;
 }
 
 .content-section {
@@ -412,8 +415,17 @@ body.lighting-page {
 .videos-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  gap: 20px;
   margin-bottom: 80px;
+  width: 100%;
+}
+
+body.lighting-page .videos-container {
+  margin-top: 50px;
+}
+
+.lighting-page .videos-container {
+  margin-top: 50px;
 }
 
 .video-box {

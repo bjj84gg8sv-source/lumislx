@@ -40,15 +40,12 @@
     }
 
     .about-right {
-      flex: 0 0 33.3%;
+      position: absolute;
+      right: clamp(120px, 22vw, 240px);
+      bottom: clamp(100px, 35vh, 200px);
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      align-items: flex-start;
-      padding-top: clamp(10px, 3vh, 30px);
-      padding-left: 0;
-      margin-left: clamp(-30px, -8vw, -80px);
-      padding-bottom: clamp(20px, 10vh, 100px);
+      align-items: center;
     }
 
     .txt {
@@ -158,7 +155,6 @@
   <nav class="nav-bar">
     <button class="nav-button" data-page="index">Home_</button>
     <button class="nav-button" data-page="lighting">Lighting_</button>
-    <button class="nav-button" data-page="sound">Sound_</button>
     <button class="nav-button" data-page="photography">Photography_</button>
     <button class="nav-button" data-page="video">Video_</button>
     <button class="nav-button" data-page="resume">Resume_</button>
