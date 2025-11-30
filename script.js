@@ -68,10 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-      } else if (page === 'home') {
-        window.location.href = '/index.html';
+      } else if (page === 'home' || page === 'index') {
+        window.location.href = './index.html';
       } else {
-        window.location.href = `/${page}.html`;
+        window.location.href = `./${page}.html`;
       }
     });
   });
