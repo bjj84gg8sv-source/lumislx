@@ -1,0 +1,6 @@
+public/Assets/Home/Main*.mp4
+public/Assets/Home/Main*.mov
+node_modules/
+.DS_Store
+*.log
+.vscode/
