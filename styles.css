@@ -12,6 +12,23 @@ html,body { height: 100%; margin: 0; font-family: Arial, Helvetica, sans-serif; 
   font-display: swap;
 }
 
+/* Load Dream Orphans font */
+@font-face {
+  font-family: 'DreamOrphans';
+  src: url('Assets/dream_orphans/Dream Orphans.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DreamOrphans';
+  src: url('Assets/dream_orphans/Dream Orphans Bd.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Navigation Bar */
 .nav-bar {
   position: fixed;
@@ -42,7 +59,7 @@ html,body { height: 100%; margin: 0; font-family: Arial, Helvetica, sans-serif; 
   padding: 8px 0;
   position: relative;
   display: inline-block;
-  font-family: 'LookinDiamonds', Arial, Helvetica, sans-serif;
+  font-family: 'DreamOrphans', Arial, Helvetica, sans-serif;
 }
 
 .nav-button:hover {
@@ -112,7 +129,7 @@ html,body { height: 100%; margin: 0; font-family: Arial, Helvetica, sans-serif; 
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  font-family: 'LookinDiamonds', "Raleway", sans-serif;
+  font-family: 'DreamOrphans', "Raleway", sans-serif;
   font-size: clamp(1.25rem, 3vw, 3rem);
   font-weight: 900;
   color: #fff;
