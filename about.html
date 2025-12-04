@@ -148,6 +148,20 @@
     .about-signature.show {
       opacity: 0.8;
     }
+
+    .location {
+      font-family: "Crimson Text", serif;
+      color: #eee;
+      font-size: clamp(14px, 2.5vw, 18px);
+      margin-top: clamp(8px, 1.5vh, 15px);
+      opacity: 0;
+      transition: opacity 1.5s ease-in;
+      align-self: flex-start;
+    }
+
+    .location.show {
+      opacity: 1;
+    }
   </style>
 </head>
 <body class="about-page">
@@ -165,6 +179,7 @@
     <div class="about-left">
       <div class="txt">Fireworks are like people. They come and go. Some leave a bigger mark than others. Still its all beautiful</div>
       <div class="attribution">-Lumi Shalaev</div>
+      <div class="location">Based in Chicago, IL</div>
       <div class="contact-info">For Inquiries Please contact <a href="mailto:lumisinquiries@icloud.com">lumisinquiries@icloud.com</a></div>
     </div>
     <div class="about-right">
@@ -208,6 +223,11 @@
       setTimeout(() => {
         document.querySelector(".attribution").classList.add("show");
       }, 4000);
+
+      // Show location after 4.8 seconds
+      setTimeout(() => {
+        document.querySelector(".location").classList.add("show");
+      }, 4800);
 
       // Show contact info after 5.7 seconds
       setTimeout(() => {
