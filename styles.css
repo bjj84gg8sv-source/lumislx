@@ -903,15 +903,21 @@ body.lighting-page .lighting-content {
 
   .text-label {
     grid-column: 1 !important;
+    grid-row: auto !important;
     width: 100%;
     padding: 15px 0;
     font-size: clamp(1.2rem, 3.5vw, 2rem);
     justify-content: flex-start !important;
+    transform: none !important;
+    margin-top: 0 !important;
   }
 
   .left-label,
   .right-label {
     grid-column: 1 !important;
+    grid-row: auto !important;
+    transform: none !important;
+    margin-top: 0 !important;
   }
 }
 
