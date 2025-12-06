@@ -148,19 +148,19 @@ const animateSequence = () => {
 
 animateSequence();
 
-// Hide loading screen after 3.4 seconds
+// Hide loading screen after 2.5 seconds
 setTimeout(() => {
   const loadingScreen = document.getElementById("loadingScreen");
   if (loadingScreen) {
     loadingScreen.classList.add("hidden");
   }
   
-  // Play the video at the 3.4 second mark
+  // Play the video at the 2.5 second mark
   const bgVideo = document.getElementById("bg-video");
   if (bgVideo) {
     bgVideo.play();
   }
-}, 3400);
+}, 2500);
 
 // Morphing text effect
 const elts = {
@@ -249,10 +249,10 @@ function animate() {
     }
 }
 
-// Start morphing animation after loading screen is done (3.4 seconds)
+// Start morphing animation after loading screen is done (2.5 seconds)
 setTimeout(() => {
   animate();
-}, 3400);
+}, 2500);
 
 // Fade out subtitle as gallery section becomes visible
 const subtitle = document.getElementById("subtitle");
@@ -300,3 +300,5 @@ if (galleryImage) {
     }
   });
 }
+
+// Grid toggle removed - functionality not working as expected

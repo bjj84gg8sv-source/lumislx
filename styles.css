@@ -1,6 +1,6 @@
 /* Fullscreen video background */
 * { box-sizing: border-box; }
-html,body { height: 100%; margin: 0; font-family: Arial, Helvetica, sans-serif; min-width: 320px; }
+html,body { height: auto; margin: 0; font-family: Arial, Helvetica, sans-serif; min-width: 320px; overflow-x: hidden; }
 :root { --headline-top: 100px; --headline-left: 50%; --headline-size: clamp(2.5rem, 6vw, 6rem); --morph-gap: 16px; }
 
 /* Load Diamonds font */
@@ -280,11 +280,12 @@ body.lighting-page {
 .lighting-content {
   position: relative;
   z-index: 5;
-  padding: 80px 40px 60px 40px;
+  padding: 80px 40px 0;
   max-width: 100%;
   margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: max-content;
   gap: 20px;
   width: 100%;
 }
@@ -320,34 +321,23 @@ body.lighting-page .lighting-content {
   aspect-ratio: 16 / 9;
 }
 
-/* Test container (1st video container) */
-.videos-container:nth-of-type(1).test-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  margin-top: 500px;
-  flex-shrink: 0;
-  width: calc(66.66% - 10px);
-  min-height: 600px;
+/* CCM container - positioned on right all the way */
+.videos-container:nth-of-type(1) {
+  grid-column: 7 / 13;
+  grid-row: 1;
+  display: block;
+  margin-right: 0;
+  margin-top: 40px;
 }
 
-
-/* CCM container - full width */
-.videos-container:nth-of-type(2) {
-  display: grid;
-  grid-template-columns: 1fr;
-  flex: 0 0 auto;
-  min-width: 0;
-  width: calc(66.66% - 10px);
-  margin-left: auto;
-}
-
-.videos-container:nth-of-type(2) > div:first-child {
+.videos-container:nth-of-type(1) > div:first-child {
   display: none;
 }
 
-.videos-container:nth-of-type(2) .video-box {
+.videos-container:nth-of-type(1) .video-box {
   min-height: auto;
   height: auto;
+  width: 100%;
 }
 
 .videos-container:first-of-type .video-box {
@@ -360,48 +350,146 @@ body.lighting-page .lighting-content {
   aspect-ratio: 16 / 9;
 }
 
-.videos-container:nth-of-type(2) video {
+.videos-container:nth-of-type(1) video {
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
 }
 
-/* RNB container (3rd video container) */
-.videos-container:nth-of-type(3) {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* RnB3 Video container - positioned on left all the way */
+.videos-container.rnb3-container {
+  grid-column: 1 / 10;
+  grid-row: 1.5;
+  display: block;
+  margin-left: 0;
+  margin-top: -180px;
   width: 100%;
 }
 
-/* Hair and PDF container (4th video container) */
-.videos-container:nth-of-type(4) {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
+.videos-container.rnb3-container .video-box {
+  position: relative;
   width: 100%;
 }
 
-.videos-container:nth-of-type(4) .video-box:first-child {
+.videos-container.rnb3-container > div:last-child {
+  display: none;
+}
+
+.videos-container.rnb3-container .text-hover-box.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background: transparent;
+  aspect-ratio: 16 / 9;
+}
+
+.videos-container.rnb3-container video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* Hair PDF container - left side */
+.hair-pdf-container {
+  grid-column: 2 / 6;
+  grid-row: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.pdf-link {
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+}
+
+.pdf-box {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+  border: 2px solid #FFD700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pdf-box:hover {
+  background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
+  transform: scale(1.02);
+}
+
+.pdf-text {
+  color: #FFD700;
+  font-family: DreamOrphans, serif;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.pdf-viewer {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+}
+
+/* Hair Video container - right side */
+.videos-container.hair-video-container {
+  grid-column: 7 / 13;
+  grid-row: 3;
+  display: block;
+  width: 100%;
+  margin-top: -120px;
+}
+
+.videos-container.hair-video-container .video-box {
   min-height: auto;
   height: auto;
 }
 
-.videos-container:nth-of-type(4) video {
+.videos-container.hair-video-container video {
+  width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
 }
 
-.videos-container:nth-of-type(4) .video-box:last-child {
-  min-height: 600px !important;
-  height: 600px !important;
-  margin-top: 80px;
-}
-
-/* VG container (5th video container) */
-.videos-container:nth-of-type(5) {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* VG Images below Hair - row 4 */
+.vg-container {
+  display: block;
   width: 100%;
+  grid-row: 4;
+}
+
+.vg-container img,
+.vg-container video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+.vg1-container {
+  grid-column: 1 / 5;
+}
+
+.vg2-container {
+  grid-column: 9 / 13;
+}
+
+.vg3-container {
+  grid-column: 5 / 9;
 }
 
 .vgc3-container .video-box {
@@ -409,20 +497,8 @@ body.lighting-page .lighting-content {
   aspect-ratio: 16 / 9;
 }
 
-.video-box {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  position: relative;
-  min-height: 250px;
-}
-
-body.lighting-page .videos-container {
-  margin-top: 50px;
-}
-
-.lighting-page .videos-container {
-  margin-top: 50px;
+.vgc3-container {
+  display: none;
 }
 
 .video-box {
@@ -430,7 +506,16 @@ body.lighting-page .videos-container {
   flex-direction: column;
   gap: 20px;
   position: relative;
-  min-height: 400px;
+  min-height: auto;
+}
+
+/* Video box base styles */
+.video-box {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  min-height: auto;
 }
 
 .content-section video,
@@ -483,6 +568,32 @@ body.lighting-page .videos-container {
   background: transparent;
 }
 
+.text-content {
+  width: 100%;
+  padding: clamp(10px, 3vw, 40px);
+  color: white;
+  font-size: clamp(12px, 2vw, 18px);
+}
+
+.text-title {
+  margin: 0 0 clamp(5px, 1vw, 10px) 0;
+  font-size: clamp(14px, 2.5vw, 24px);
+  font-weight: bold;
+  font-family: 'DreamOrphans', Arial;
+}
+
+.text-subtitle {
+  display: block;
+  margin: 0 0 clamp(3px, 0.5vw, 8px) 0;
+  font-size: clamp(10px, 1.5vw, 14px);
+}
+
+.text-date {
+  display: block;
+  font-size: clamp(10px, 1.2vw, 12px);
+  opacity: 0.8;
+}
+
 .text-hover-box::after {
   content: '';
   position: absolute;
@@ -502,7 +613,6 @@ body.lighting-page .videos-container {
 .text-content {
   position: relative;
   z-index: 2;
-  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -513,13 +623,6 @@ body.lighting-page .videos-container {
 .text-hover-box:hover .text-content {
   opacity: 1;
 }
-
-.text-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: #fff;
-  margin: 0;
-  padding: 0;
 }
 
 .text-subtitle {

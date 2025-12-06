@@ -8,7 +8,7 @@
   <!-- Preload critical resources: background and CCM video first -->
   <link rel="preload" as="image" href="Assets/Lighting/Lighting Background.jpeg">
   <link rel="preload" as="video" href="Assets/Lighting/Lx portfolio/CCM.mp4">
-  <link rel="stylesheet" href="styles.css?v=82">
+    <link rel="stylesheet" href="styles.css?v=169">
   <style>
     body.lighting-page {
       background-image: url('Assets/Lighting/Lighting Background.jpeg');
@@ -46,13 +46,6 @@
 
   <!-- Content Sections -->
   <div class="lighting-content">
-    <!-- Section 3: Test on Left -->
-    <div class="videos-container test-container">
-      <div class="video-box test-box">
-        <img src="Assets/Lighting/Lx portfolio/Test.jpeg" alt="Test" style="width: 100%; height: auto; object-fit: contain; border-radius: 8px;">
-      </div>
-    </div>
-
     <!-- Section 1: CCM on Right with Text Overlay -->
     <div class="videos-container">
       <div></div>
@@ -71,23 +64,36 @@
       </div>
     </div>
 
-    <!-- Section 4: RNB1 and RNB2 -->
-    <div class="videos-container rnb-container">
-      <div class="video-box">
-        <img src="Assets/Lighting/Lx portfolio/rnb1.jpg" alt="RNB 1" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-      </div>
-      <div class="video-box">
-        <img src="Assets/Lighting/Lx portfolio/rnb2.jpg" alt="RNB 2" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-      </div>
-    </div>
-
-    <!-- Section 5: Hair on Left with Text Overlay -->
-    <div class="videos-container">
+    <!-- Section 3.5: RnB3 Video -->
+    <div class="videos-container rnb3-container">
       <div class="video-box">
         <div class="text-hover-box overlay">
           <div class="text-content">
-            <p class="text-title">Hair - Lighting Concept</p>
-            <span class="text-subtitle">Lighting Designer | Scenic Designer</span>
+            <p class="text-title">RnB Night</p>
+            <span class="text-subtitle">Production Manager | Lighting Designer</span>
+            <span class="text-date">9.10.25</span>
+          </div>
+        </div>
+        <video autoplay muted loop preload="auto">
+          <source src="Assets/Lighting/Lx portfolio/RnB3.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div></div>
+    </div>
+
+    <!-- Section 5: Hair PDF on Left -->
+    <div class="hair-pdf-container">
+      <iframe src="Assets/Lighting/Lx portfolio/Hair.pdf#toolbar=0&navpanes=0" class="pdf-viewer"></iframe>
+    </div>
+
+    <!-- Section 5.5: Hair Video on Right -->
+    <div class="videos-container hair-video-container">
+      <div class="video-box">
+        <div class="text-hover-box overlay">
+          <div class="text-content">
+            <p class="text-title">Hair</p>
+            <span class="text-subtitle">Lighting and Scenic Design Concept</span>
             <span class="text-date">08.08.23</span>
           </div>
         </div>
@@ -96,35 +102,25 @@
           Your browser does not support the video tag.
         </video>
       </div>
-      <div class="video-box">
-        <iframe src="Assets/Lighting/Lx portfolio/Hair.pdf?v=2" style="width: 100%; height: 100%; border: none; border-radius: 8px;"></iframe>
-      </div>
     </div>
 
-    <!-- Section 6: VG 1 and VG 2 -->
-    <div class="videos-container vg-container">
-      <div class="video-box">
-        <img src="Assets/Lighting/Lx portfolio/VG 1.jpeg" alt="VG 1" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-      </div>
-      <div class="video-box">
-        <video autoplay muted loop>
-          <source src="Assets/Lighting/Lx portfolio/VG 2.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
+    <!-- Section 6: VG Images Below Hair -->
+    <div class="vg-container vg1-container">
+      <img src="Assets/Lighting/Lx portfolio/VG 1.jpeg" alt="VG 1">
     </div>
 
-    <!-- Section 7: VGC 3 -->
-    <div class="videos-container vgc3-container">
-      <div class="video-box">
-        <img src="Assets/Lighting/Lx portfolio/VGC 3.jpeg" alt="VGC 3" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-      </div>
+    <div class="vg-container vg2-container">
+      <video autoplay muted loop>
+        <source src="Assets/Lighting/Lx portfolio/VG 2.mp4" type="video/mp4">
+        Your browser does not support the image tag.
+      </video>
+    </div>
+
+    <div class="vg-container vg3-container">
+      <img src="Assets/Lighting/Lx portfolio/VGC 3.jpeg" alt="VGC 3">
     </div>
   </div>
 
-  <!-- Signature -->
-  <img src="Assets/About/Signature.png" alt="Signature" class="about-signature" />
-
-  <script src="script.js?v=3"></script>
+  <script src="script.js?v=4"></script>
 </body>
 </html>
