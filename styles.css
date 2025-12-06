@@ -607,39 +607,36 @@ body.lighting-page .lighting-content {
   display: block;
 }
 
-/* Text overlay layer - absolute positioning with responsive scaling */
-.text-overlay-layer {
-  position: absolute;
-  top: 550px;
-  left: 0;
-  width: 100%;
-  height: auto;
-  pointer-events: none;
-  z-index: 100;
-}
-
-.overlay-text {
-  position: absolute;
+/* Text labels - grid items that scale with content */
+.text-label {
   font-family: DreamOrphans, serif;
   font-size: clamp(1.5rem, 4vw, 3rem);
   color: white;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   white-space: nowrap;
-  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
 }
 
-.overlay-text span {
+.text-label span {
   display: inline-block;
 }
 
-.left-text {
-  left: 40px;
-  top: 0;
+.left-label {
+  grid-column: 1 / 7;
+  justify-content: flex-start;
+  padding-left: 0;
+  grid-row: 1;
+  margin-top: -80px;
 }
 
-.right-text {
-  right: 40px;
-  top: 0;
+.right-label {
+  grid-column: 7 / 13;
+  justify-content: flex-end;
+  padding-right: 0;
+  grid-row: 3;
+  transform: translateY(clamp(-200px, -15vw, -120px));
 }
 .vg-container {
   display: block;
@@ -904,28 +901,17 @@ body.lighting-page .lighting-content {
     aspect-ratio: 16 / 9;
   }
 
-  .text-overlay-layer {
-    position: fixed;
-    top: auto;
-    bottom: 0;
-    left: 0;
-    right: 0;
+  .text-label {
+    grid-column: 1 !important;
     width: 100%;
-    height: auto;
-    display: block;
-    padding: 20px 16px;
-    background: rgba(0, 0, 0, 0.7);
+    padding: 15px 0;
+    font-size: clamp(1.2rem, 3.5vw, 2rem);
+    justify-content: flex-start !important;
   }
 
-  .left-text,
-  .right-text {
-    position: static !important;
-    left: auto !important;
-    right: auto !important;
-    top: auto !important;
-    display: block;
-    margin-bottom: 10px;
-    font-size: clamp(1rem, 3.5vw, 2rem);
+  .left-label,
+  .right-label {
+    grid-column: 1 !important;
   }
 }
 
