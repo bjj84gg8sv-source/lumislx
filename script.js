@@ -1,3 +1,32 @@
+// Hamburger Menu Toggle for Mobile
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const navButtonsContainer = document.querySelector('.nav-buttons-container');
+  const navButtons = document.querySelectorAll('.nav-button');
+
+  if (hamburger && navButtonsContainer) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navButtonsContainer.classList.toggle('active');
+    });
+
+    navButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navButtonsContainer.classList.remove('active');
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.nav-bar')) {
+        hamburger.classList.remove('active');
+        navButtonsContainer.classList.remove('active');
+      }
+    });
+  }
+});
+
 // Shimmer Wave Effect for Navigation Buttons
 class TextShimmerWave {
   constructor(element) {

@@ -8,7 +8,7 @@
   <!-- Preload critical resources: background and CCM video first -->
   <link rel="preload" as="image" href="Assets/Lighting/Lighting Background.jpeg">
   <link rel="preload" as="video" href="Assets/Lighting/Lx portfolio/CCM.mp4">
-    <link rel="stylesheet" href="styles.css?v=189">
+    <link rel="stylesheet" href="styles.css?v=190">
   <style>
     body.lighting-page {
       background-image: url('Assets/Lighting/Lighting Background.jpeg');
@@ -23,12 +23,19 @@
 <body class="lighting-page">
   <!-- Navigation Bar -->
   <nav class="nav-bar">
-    <button class="nav-button" data-page="index">Home_</button>
-    <button class="nav-button" data-page="lighting">Lighting_</button>
-    <button class="nav-button" data-page="photography">Photography_</button>
-    <button class="nav-button" data-page="video">Video_</button>
-    <button class="nav-button" data-page="resume">Resume_</button>
-    <button class="nav-button" data-page="about">About_</button>
+    <button class="hamburger-menu" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="nav-buttons-container">
+      <button class="nav-button" data-page="index">Home_</button>
+      <button class="nav-button" data-page="lighting">Lighting_</button>
+      <button class="nav-button" data-page="photography">Photography_</button>
+      <button class="nav-button" data-page="video">Video_</button>
+      <button class="nav-button" data-page="resume">Resume_</button>
+      <button class="nav-button" data-page="about">About_</button>
+    </div>
   </nav>
 
   <section id="hero" class="section" style="background-image: url('Assets/Lighting/Lighting Background.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
