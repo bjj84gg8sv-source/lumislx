@@ -607,21 +607,19 @@ body.lighting-page .lighting-content {
   display: block;
 }
 
-/* Text overlay layer - part of grid flow that scales with content */
+/* Text overlay layer - absolute positioning with responsive scaling */
 .text-overlay-layer {
-  grid-column: 1 / 13;
+  position: absolute;
+  top: 550px;
+  left: 0;
   width: 100%;
   height: auto;
   pointer-events: none;
-  z-index: 1000;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 20px;
-  margin-top: 60px;
-  align-items: center;
+  z-index: 100;
 }
 
 .overlay-text {
+  position: absolute;
   font-family: DreamOrphans, serif;
   font-size: clamp(1.5rem, 4vw, 3rem);
   color: white;
@@ -635,18 +633,13 @@ body.lighting-page .lighting-content {
 }
 
 .left-text {
-  grid-column: 1 / 7;
-  text-align: left;
-  display: flex;
-  align-items: center;
+  left: 40px;
+  top: 0;
 }
 
 .right-text {
-  grid-column: 7 / 13;
-  text-align: right;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  right: 40px;
+  top: 0;
 }
 .vg-container {
   display: block;
@@ -912,24 +905,27 @@ body.lighting-page .lighting-content {
   }
 
   .text-overlay-layer {
-    position: relative;
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
     width: 100%;
     height: auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    padding: 0 16px;
-    margin-top: 40px;
-    gap: 20px;
+    display: block;
+    padding: 20px 16px;
+    background: rgba(0, 0, 0, 0.7);
   }
 
   .left-text,
   .right-text {
-    grid-column: 1 !important;
-    text-align: left !important;
-    justify-content: flex-start !important;
-    display: flex !important;
-    align-items: center;
-    margin: 20px 0;
+    position: static !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    display: block;
+    margin-bottom: 10px;
+    font-size: clamp(1rem, 3.5vw, 2rem);
   }
 }
 
