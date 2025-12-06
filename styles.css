@@ -363,7 +363,7 @@ body.lighting-page .lighting-content {
   grid-row: 1.5;
   display: block;
   margin-left: 0;
-  margin-top: -180px;
+  margin-top: -80px;
   width: 100%;
 }
 
@@ -402,6 +402,7 @@ body.lighting-page .lighting-content {
   align-items: center;
   justify-content: center;
   width: 100%;
+  margin-top: 40px;
 }
 
 .pdf-link {
@@ -448,7 +449,7 @@ body.lighting-page .lighting-content {
   grid-row: 3;
   display: block;
   width: 100%;
-  margin-top: -120px;
+  margin-top: -20px;
 }
 
 .videos-container.hair-video-container .video-box {
@@ -464,11 +465,52 @@ body.lighting-page .lighting-content {
   display: block;
 }
 
-/* VG Images below Hair - row 4 */
+/* Text overlay layer - positioned absolutely with page */
+.text-overlay-layer {
+  position: absolute;
+  top: 150px;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.overlay-text {
+  position: absolute;
+  font-family: DreamOrphans, serif;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+
+.overlay-text span {
+  display: inline-block;
+}
+
+.left-text {
+  left: 40px;
+  top: 20%;
+  transform: translateY(-50%);
+  position: absolute;
+}
+
+.right-text {
+  right: 40px;
+  top: 250%;
+  transform: translateY(-50%);
+  position: absolute;
+}
 .vg-container {
   display: block;
   width: 100%;
   grid-row: 4;
+}
+
+.vg-box {
+  position: relative;
+  width: 100%;
 }
 
 .vg-container img,
@@ -480,16 +522,29 @@ body.lighting-page .lighting-content {
   display: block;
 }
 
+.vg-container .text-hover-box.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background: transparent;
+  aspect-ratio: 16 / 9;
+}
+
 .vg1-container {
   grid-column: 1 / 5;
 }
 
 .vg2-container {
   grid-column: 9 / 13;
+  margin-top: 160px;
 }
 
 .vg3-container {
   grid-column: 5 / 9;
+  margin-top: 80px;
 }
 
 .vgc3-container .video-box {
