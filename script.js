@@ -4,27 +4,36 @@ document.addEventListener('DOMContentLoaded', () => {
   const navButtonsContainer = document.querySelector('.nav-buttons-container');
   const navButtons = document.querySelectorAll('.nav-button');
 
-  if (hamburger && navButtonsContainer) {
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      navButtonsContainer.classList.toggle('active');
-    });
-
-    navButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navButtonsContainer.classList.remove('active');
-      });
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.nav-bar')) {
-        hamburger.classList.remove('active');
-        navButtonsContainer.classList.remove('active');
-      }
-    });
+  if (!hamburger || !navButtonsContainer) {
+    console.warn('Hamburger menu or nav container not found');
+    return;
   }
+
+  // Toggle menu on hamburger click
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    hamburger.classList.toggle('active');
+    navButtonsContainer.classList.toggle('active');
+  });
+
+  // Close menu when clicking a nav button
+  navButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      navButtonsContainer.classList.remove('active');
+    });
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    const isClickInsideNav = e.target.closest('.nav-bar');
+    if (!isClickInsideNav) {
+      hamburger.classList.remove('active');
+      navButtonsContainer.classList.remove('active');
+    }
+  });
+
+  console.log('Hamburger menu initialized');
 });
 
 // Shimmer Wave Effect for Navigation Buttons
