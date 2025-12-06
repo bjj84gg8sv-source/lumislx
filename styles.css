@@ -849,3 +849,50 @@ body.lighting-page .lighting-content {
   }
 }
 
+/* Mobile vertical layout for lighting page */
+@media (max-width: 768px) {
+  .lighting-content {
+    grid-template-columns: 1fr;
+    padding: 60px 16px 0;
+    gap: 16px;
+  }
+
+  .videos-container:nth-of-type(1),
+  .videos-container:nth-of-type(2),
+  .rnb3-container,
+  .hair-video-container,
+  .hair-pdf-container,
+  .vg1-container,
+  .vg2-container,
+  .vg3-container {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    margin-top: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .videos-container video,
+  .hair-pdf-container iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .vg-container {
+    width: 100%;
+  }
+
+  .text-overlay-layer {
+    position: absolute;
+    top: 200px;
+  }
+
+  .left-text,
+  .right-text {
+    position: static;
+    display: none;
+  }
+}
+
