@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About Me - Lumi Shalaev</title>
   <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="stylesheet" href="styles.css?v=202">
+  <link rel="stylesheet" href="styles.css?v=203">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
 
@@ -37,6 +37,17 @@
       flex-direction: column;
       justify-content: flex-start;
       padding-top: clamp(40px, 15vh, 80px);
+    }
+
+    .about-title {
+      display: block;
+      color: #eee;
+      font-size: clamp(36px, 6vw, 56px);
+      font-family: "Crimson Text", serif;
+      font-weight: 600;
+      margin-bottom: clamp(30px, 5vh, 60px);
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out forwards;
     }
 
     .about-right {
@@ -135,14 +146,12 @@
     }
 
     .about-signature {
-      position: fixed;
-      bottom: 10px;
-      right: 20px;
       width: clamp(80px, 12vw, 150px);
       height: auto;
       opacity: 0;
       transition: opacity 0.8s ease-in;
       z-index: 50;
+      margin-bottom: clamp(20px, 4vh, 40px);
     }
 
     .about-signature.show {
@@ -184,31 +193,43 @@
 
   <div class="about-container">
     <div class="about-left">
-      <div class="txt">Fireworks are like people. They come and go. Some leave a bigger mark than others. Still its all beautiful</div>
-      <div class="attribution">-Lumi Shalaev</div>
-      <div class="location">Based in Chicago, IL</div>
-      <div class="contact-info">For Inquiries Please contact <a href="mailto:lumisinquiries@icloud.com">lumisinquiries@icloud.com</a></div>
+      <div class="about-title">Lumi Shalaev</div>
+      <div class="txt">Don't talk about it, live it!</div>
+      <div class="attribution"><i>-The Mad Ones 2017</i></div>
     </div>
     <div class="about-right">
       <img class="about-image" src="Assets/About/Lumi.jpeg" alt="Lumi">
+      <img src="Assets/About/Signature.png" alt="Signature" class="about-signature" />
     </div>
   </div>
 
-  <!-- Signature -->
-  <img src="Assets/About/Signature.png" alt="Signature" class="about-signature" />
+  <!-- Footer Bar -->
+  <footer class="footer-bar">
+    <div class="footer-content">
+      <div class="footer-item">Lumi Shalaev</div>
+      <div class="footer-item">Chicago, IL Based</div>
+      <div class="footer-item">For Inquiries Please contact <span class="footer-email">lumisinquiries@icloud.com</span></div>
+      <div class="footer-item">Website Designed by Lumi Shalaev</div>
+    </div>
+  </footer>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      const titleElement = document.querySelector(".about-title");
       const txtElement = document.querySelector(".txt");
-      const textContent = '"Fireworks are like people. They come and go. Some leave a bigger mark than others. Still its all beautiful"';
+      const textContent = '"Don\'t talk about it, live it!"';
 
+      // Show title immediately (first)
+      titleElement.style.animationDelay = "0s";
+
+      // Animate quote text (second)
       const animateText = () => {
         txtElement.textContent = "";
         
         textContent.split("").forEach((char, index) => {
           const span = document.createElement("span");
           span.textContent = char;
-          span.style.animationDelay = `${index * 0.05}s`;
+          span.style.animationDelay = `${1.2 + index * 0.05}s`;
           span.style.display = "inline";
           span.style.whiteSpace = "normal";
           txtElement.appendChild(span);
@@ -226,25 +247,15 @@
         document.querySelector(".about-image").classList.add("show");
       }, 2200);
 
-      // Show attribution and text after 4 seconds
+      // Show attribution after 3.2 seconds (after quote finishes)
       setTimeout(() => {
         document.querySelector(".attribution").classList.add("show");
-      }, 4000);
+      }, 3200);
 
-      // Show location after 4.8 seconds
-      setTimeout(() => {
-        document.querySelector(".location").classList.add("show");
-      }, 4800);
-
-      // Show contact info after 5.7 seconds
-      setTimeout(() => {
-        document.querySelector(".contact-info").classList.add("show");
-      }, 5700);
-
-      // Show signature after 7 seconds with fade in
+      // Show signature after 4.5 seconds with fade in
       setTimeout(() => {
         document.querySelector(".about-signature").classList.add("show");
-      }, 7000);
+      }, 4500);
     });
   </script>
 

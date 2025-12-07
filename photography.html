@@ -5,9 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Photography - Lumi Shalaev</title>
   <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="stylesheet" href="styles.css?v=202">
+  <link rel="stylesheet" href="styles.css?v=229">
+  <style>
+    body.photography-page {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('Assets/Photography/Photo Background.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+  </style>
 </head>
-<body>
+<body class="photography-page">
   <!-- Navigation Bar -->
   <nav class="nav-bar">
     <button class="hamburger-menu" id="hamburger">
@@ -25,25 +35,136 @@
     </div>
   </nav>
 
-  <section id="hero" class="section">
-    <div class="video-wrap">
-      <video id="bg-video" muted loop playsinline>
-        <source src="Assets/Home/main-slide.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      <div class="overlay"></div>
+  <!-- Gallery Container -->
+  <div class="photo-gallery">
+    <div class="gallery-track">
+      <!-- Row 1: Randomized Photos (scroll right) -->
+      <div class="gallery-row gallery-row-1">
+        <div class="gallery-item gallery-item-0"><img src="Assets/Photography/Shows/Ben 1.jpg" alt="Ben 1" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+        <div class="gallery-item gallery-item-1"><img src="Assets/Photography/Street/IMG_1700.jpeg" alt="IMG 1700" data-title="" data-subtitle="12.17.24" /></div>
+        <div class="gallery-item gallery-item-2"><img src="Assets/Photography/Shows/Group 5.jpg" alt="Group 5" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+        <div class="gallery-item gallery-item-3"><img src="Assets/Photography/Street/IMG_0096.JPG" alt="IMG 0096" data-title="" data-subtitle="10.19.24" /></div>
+        <div class="gallery-item gallery-item-4"><img src="Assets/Photography/Shows/Lartey 2.jpg" alt="Lartey 2" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+        <div class="gallery-item gallery-item-5"><img src="Assets/Photography/Street/IMG_4274.jpeg" alt="IMG 4274" data-title="" data-subtitle="09.14.24" /></div>
+        <div class="gallery-item gallery-item-6"><img src="Assets/Photography/Shows/Jerome 1.jpg" alt="Jerome 1" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+        <div class="gallery-item gallery-item-7"><img src="Assets/Photography/Street/IMG_5019.JPG" alt="IMG 5019" data-title="" data-subtitle="10.08.24" /></div>
+      </div>
+      
+      <!-- Row 2: Randomized Photos (scroll left) -->
+      <div class="gallery-row gallery-row-2">
+        <div class="gallery-item gallery-item-8"><img src="Assets/Photography/Shows/Kayla 1.jpg" alt="Kayla 1" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+        <div class="gallery-item gallery-item-9"><img src="Assets/Photography/Street/IMG_7421.jpeg" alt="IMG 7421" data-title="" data-subtitle="12.01.24" /></div>
+        <div class="gallery-item gallery-item-10"><img src="Assets/Photography/Shows/Lartey 5.jpg" alt="Lartey 5" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+        <div class="gallery-item gallery-item-11"><img src="Assets/Photography/Street/IMG_2868.JPG" alt="IMG 2868" data-title="" data-subtitle="09.29.24" /></div>
+        <div class="gallery-item gallery-item-12"><img src="Assets/Photography/Shows/Jackie 3.jpg" alt="Jackie 3" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+        <div class="gallery-item gallery-item-13"><img src="Assets/Photography/Street/IMG_1419.jpeg" alt="IMG 1419" data-title="" data-subtitle="08.17.24" /></div>
+        <div class="gallery-item gallery-item-14"><img src="Assets/Photography/Shows/Group 8.jpg" alt="Group 8" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+        <div class="gallery-item gallery-item-15"><img src="Assets/Photography/Street/IMG_5878.jpeg" alt="IMG 5878" data-title="" data-subtitle="11.30.24" /></div>
+      </div>
+      
+      <!-- Row 3: Randomized Photos (scroll right) -->
+      <div class="gallery-row gallery-row-3">
+        <div class="gallery-item gallery-item-16"><img src="Assets/Photography/Shows/Group 2.jpg" alt="Group 2" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+        <div class="gallery-item gallery-item-17"><img src="Assets/Photography/Street/IMG_0208.jpeg" alt="IMG 0208" data-title="" data-subtitle="10.26.24" /></div>
+        <div class="gallery-item gallery-item-18"><img src="Assets/Photography/Shows/Group 4.jpg" alt="Group 4" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+        <div class="gallery-item gallery-item-19"><img src="Assets/Photography/Street/IMG_7281.jpeg" alt="IMG 7281" data-title="" data-subtitle="11.16.24" /></div>
+        <div class="gallery-item gallery-item-20"><img src="Assets/Photography/Shows/Lartey 1.jpg" alt="Lartey 1" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+        <div class="gallery-item gallery-item-21"><img src="Assets/Photography/Street/IMG_6959.jpeg" alt="IMG 6959" data-title="" data-subtitle="12.21.24" /></div>
+        <div class="gallery-item gallery-item-22"><img src="Assets/Photography/Shows/Group 7.jpg" alt="Group 7" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+      </div>
     </div>
-    <div class="content">
-      <h1 class="headline top-left">Photography Portfolio</h1>
-    </div>
+  </div>
 
-    <!-- Subtitle (morphing text) -->
-    <div id="subtitle">
-      <span id="text1"></span>
-      <span id="text2"></span>
+  <!-- Photo Modal -->
+  <div id="photoModal" class="photo-modal" style="display: none;">
+    <div class="photo-modal-backdrop"></div>
+    <div class="photo-modal-content">
+      <div class="photo-modal-wrapper">
+        <div class="photo-modal-text">
+          <h2 id="photoModalTitle" class="photo-modal-title"></h2>
+          <p id="photoModalSubtitle" class="photo-modal-subtitle"></p>
+        </div>
+        <img id="photoModalImage" src="" alt="Full size photo" />
+      </div>
+      <button id="closePhotoModal" class="photo-modal-close">✕</button>
     </div>
-  </section>
+  </div>
+
+  <!-- Footer Bar -->
+  <footer class="footer-bar">
+    <div class="footer-content">
+      <div class="footer-item">Lumi Shalaev</div>
+      <div class="footer-item">Chicago, IL Based</div>
+      <div class="footer-item">For Inquiries Please contact <a href="mailto:lumisinquiries@icloud.com" class="footer-email">lumisinquiries@icloud.com</a></div>
+      <div class="footer-item">Website Designed by Lumi Shalaev</div>
+    </div>
+  </footer>
 
   <script src="script.js"></script>
+  <script>
+    // Photo gallery modal functionality
+    const photoModal = document.getElementById('photoModal');
+    const photoModalImage = document.getElementById('photoModalImage');
+    const photoModalTitle = document.getElementById('photoModalTitle');
+    const photoModalSubtitle = document.getElementById('photoModalSubtitle');
+    const closePhotoModal = document.getElementById('closePhotoModal');
+    const galleryItems = document.querySelectorAll('.gallery-item img');
+
+    galleryItems.forEach(img => {
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', (e) => {
+        photoModalImage.src = img.src;
+        photoModalTitle.textContent = img.dataset.title || '';
+        photoModalSubtitle.textContent = img.dataset.subtitle || '';
+        photoModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+
+        // Check if image is vertical after it loads
+        const checkAndSetVertical = () => {
+          if (photoModalImage.naturalHeight > photoModalImage.naturalWidth) {
+            photoModalImage.classList.add('vertical');
+          } else {
+            photoModalImage.classList.remove('vertical');
+          }
+        };
+
+        if (photoModalImage.complete) {
+          checkAndSetVertical();
+        } else {
+          photoModalImage.addEventListener('load', checkAndSetVertical, { once: true });
+        }
+      });
+    });
+
+    closePhotoModal.addEventListener('click', () => {
+      photoModal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    });
+
+    photoModal.addEventListener('click', (e) => {
+      if (e.target === photoModal || e.target === document.querySelector('.photo-modal-backdrop')) {
+        photoModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && photoModal.style.display === 'flex') {
+        photoModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    });
+  </script>
+  <script>
+    window.addEventListener('load', () => {
+      const gallery = document.querySelector('.photo-gallery');
+      if (gallery) {
+        const scrollWidth = gallery.scrollWidth;
+        const clientWidth = gallery.clientWidth;
+        const scrollPosition = (scrollWidth - clientWidth) / 2;
+        gallery.scrollLeft = scrollPosition;
+      }
+    });
+  </script>
 </body>
 </html>

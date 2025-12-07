@@ -8,10 +8,10 @@
   <!-- Preload critical resources: background and CCM video first -->
   <link rel="preload" as="image" href="Assets/Lighting/Lighting Background.jpeg">
   <link rel="preload" as="video" href="Assets/Lighting/Lx portfolio/CCM.mp4">
-    <link rel="stylesheet" href="styles.css?v=202">
+    <link rel="stylesheet" href="styles.css?v=235">
   <style>
     body.lighting-page {
-      background-image: url('Assets/Lighting/Lighting Background.jpeg');
+      background-image: linear-gradient(rgba(100, 0, 50, 0.85), rgba(100, 0, 50, 0.85)), url('Assets/Lighting/Lighting Background.jpeg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -38,7 +38,7 @@
     </div>
   </nav>
 
-  <section id="hero" class="section" style="background-image: url('Assets/Lighting/Lighting Background.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+  <section id="hero" class="section" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('Assets/Lighting/Lighting Background.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <div class="overlay"></div>
     <div class="content">
     </div>
@@ -53,116 +53,138 @@
 
   <!-- Content Sections -->
   <div class="lighting-content">
-    <!-- Section 1: CCM on Right with Text Overlay -->
-    <div class="videos-container">
-      <div></div>
-      <div class="video-box">
-        <div class="text-hover-box overlay">
-          <div class="text-content">
-            <p class="text-title">Parkside Mix and Range Concert</p>
-            <span class="text-subtitle">Lighting Designer | Head Electrician | Photographer</span>
-            <span class="text-date">11.12.25</span>
-          </div>
-        </div>
+    <!-- Row 1: CCM Video (left) + Text (right) -->
+    <div class="video-item">
+      <div class="video-wrapper clickable-video" data-video-src="Assets/Lighting/Lx portfolio/CCM.mp4" onclick="openVideoModal(this)">
         <video autoplay muted loop preload="auto">
           <source src="Assets/Lighting/Lx portfolio/CCM.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
+        <div class="click-for-more">Click for more</div>
       </div>
     </div>
+    <div class="text-box">
+      <p class="text-title">Parkside Mix and Range Concert</p>
+      <span class="text-subtitle">Lighting Designer | Head Electrician | Photographer</span>
+      <span class="text-date">11.12.25</span>
+    </div>
 
-    <!-- Section 3.5: RnB3 Video -->
-    <div class="videos-container rnb3-container">
-      <div class="video-box">
-        <div class="text-hover-box overlay">
-          <div class="text-content">
-            <p class="text-title">RnB Night</p>
-            <span class="text-subtitle">Production Manager | Lighting Designer | Head Electrician</span>
-            <span class="text-date">9.10.25</span>
-          </div>
-        </div>
+    <!-- Row 2: Text (right) + RnB Video (right) -->
+    <div class="text-box text-right">
+      <p class="text-title">RnB Night</p>
+      <span class="text-subtitle">Production Manager | Lighting Designer | Head Electrician</span>
+      <span class="text-date">9.10.25</span>
+    </div>
+    <div class="video-item">
+      <div class="video-wrapper clickable-video" data-video-src="Assets/Lighting/Lx portfolio/RnB3.mp4" onclick="openVideoModal(this)">
         <video autoplay muted loop preload="auto">
           <source src="Assets/Lighting/Lx portfolio/RnB3.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
+        <div class="click-for-more">Click for more</div>
       </div>
-      <div></div>
     </div>
 
-    <!-- Section 5: Hair PDF on Left -->
-    <div class="hair-pdf-container">
-      <iframe src="Assets/Lighting/Lx portfolio/Hair.pdf#toolbar=0&navpanes=0" class="pdf-viewer"></iframe>
+    <!-- Row 3: VG Video (left) + Text (right) -->
+    <div class="video-item">
+      <div class="video-wrapper clickable-video" data-video-src="Assets/Lighting/Lx portfolio/VG 2.mp4" onclick="openVideoModal(this)">
+        <video autoplay muted loop>
+          <source src="Assets/Lighting/Lx portfolio/VG 2.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="click-for-more">Click for more</div>
+      </div>
+    </div>
+    <div class="text-box">
+      <p class="text-title">Video Game Concert</p>
+      <span class="text-subtitle">Lighting Designer | Projections Designer | Head Electrician</span>
+      <span class="text-date">02.02.25</span>
     </div>
 
-    <!-- Section 5.5: Hair Video on Right -->
-    <div class="videos-container hair-video-container">
-      <div class="video-box">
-        <div class="text-hover-box overlay">
-          <div class="text-content">
-            <p class="text-title">Hair</p>
-            <span class="text-subtitle">Lighting and Scenic Design Concept</span>
-            <span class="text-date">08.08.23</span>
-          </div>
-        </div>
+    <!-- Row 4: Text (left, pushed right) + Tea Image (right) -->
+    <div class="text-box text-left-pushed">
+      <p class="text-title">Tea</p>
+      <span class="text-subtitle">Design and Scenic Concepts</span>
+      <span class="text-date">10.15.22</span>
+    </div>
+    <div class="video-item">
+      <div class="video-wrapper clickable-video" data-video-src="Assets/Lighting/Lx portfolio/Tea Cover.png" onclick="openVideoModal(this)">
+        <img src="Assets/Lighting/Lx portfolio/Tea Cover.png" style="width: 100%; height: 100%; object-fit: cover;" />
+        <div class="click-for-more">Click for more</div>
+      </div>
+    </div>
+
+    <!-- Row 5: Hair Video (left) + Text (right, pushed left) -->
+    <div class="video-item">
+      <div class="video-wrapper clickable-video" data-video-src="Assets/Lighting/Lx portfolio/Hair.mp4" onclick="openVideoModal(this)">
         <video autoplay muted loop>
           <source src="Assets/Lighting/Lx portfolio/Hair.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
+        <div class="click-for-more">Click for more</div>
       </div>
     </div>
-
-    <!-- Text labels for sections -->
-    <div class="text-label left-label">
-      <span>Lighting Design Examples</span>
-    </div>
-    <div class="text-label right-label">
-      <span>Design Process</span>
-    </div>
-
-    <!-- Section 6: VG Images Below Hair -->
-    <div class="vg-container vg1-container">
-      <div class="vg-box">
-        <div class="text-hover-box overlay">
-          <div class="text-content">
-            <p class="text-title">Video Game Concert</p>
-            <span class="text-subtitle">testing gel colors on light wood</span>
-            <span class="text-date">Design Process</span>
-          </div>
-        </div>
-        <img src="Assets/Lighting/Lx portfolio/VG 1.jpeg" alt="VG 1">
-      </div>
-    </div>
-
-    <div class="vg-container vg2-container">
-      <div class="vg-box">
-        <div class="text-hover-box overlay">
-          <div class="text-content">
-            <p class="text-title">Video Game Concert</p>
-            <span class="text-subtitle">Lighting Designer | Projections Designer | Head Electrician</span>
-            <span class="text-date">02.02.25</span>
-          </div>
-        </div>
-        <video autoplay muted loop>
-          <source src="Assets/Lighting/Lx portfolio/VG 2.mp4" type="video/mp4">
-          Your browser does not support the image tag.
-        </video>
-      </div>
-    </div>
-
-    <div class="vg-container vg3-container">
-      <div class="vg-box">
-        <div class="text-hover-box overlay">
-          <div class="text-content">
-            <p class="text-title">Video Game Concert</p>
-            <span class="text-subtitle">Stage Rendering / Cueing</span>
-            <span class="text-date">Design Process cont.</span>
-          </div>
-        </div>
-        <img src="Assets/Lighting/Lx portfolio/VGC 3.jpeg" alt="VGC 3">
-      </div>
+    <div class="text-box text-left-pushed-right">
+      <p class="text-title">Hair</p>
+      <span class="text-subtitle">Lighting and Scenic Design Concept</span>
+      <span class="text-date">08.08.23</span>
     </div>
   </div>
 
-  <script src="script.js?v=4"></script>
+  <!-- Custom Cursor -->
+  <div id="custom-cursor" class="custom-cursor">
+    <svg class="custom-cursor-icon" xmlns='http://www.w3.org/2000/svg' width='26' height='31' fill='none' viewBox='0 0 26 31'>
+      <g clipPath='url(#a)'>
+        <path fill={'#f0f'} fillRule='evenodd' stroke={'#fff'} strokeLinecap='square' strokeWidth='2' d='M21.993 14.425 2.549 2.935l4.444 23.108 4.653-10.002z' clipRule='evenodd'/>
+      </g>
+      <defs>
+        <clipPath id='a'>
+          <path fill={'#f0f'} d='M0 0h26v31H0z'/>
+        </clipPath>
+      </defs>
+    </svg>
+    <div class="custom-cursor-label">Click for more</div>
+  </div>
+
+  <!-- Video Modal for fullscreen playback -->
+  <div id="video-modal" class="video-modal">
+    <div class="video-modal-backdrop"></div>
+    <div class="video-modal-wrapper">
+      <h2 id="modal-title" class="modal-title"></h2>
+      <div class="video-modal-content">
+        <button class="video-modal-close" onclick="closeVideoModal()">&times;</button>
+        <video id="modal-video" autoplay loop muted>
+          <source src="" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <img id="modal-image" style="display: none; width: 100%; height: 100%; object-fit: contain;" />
+        <iframe id="modal-youtube" style="display: none; width: 100%; height: 100%; border: none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe id="modal-pdf" style="display: none; width: 100%; height: 100%; border: none;" type="application/pdf"></iframe>
+      </div>
+    </div>
+    
+    <!-- Navigation Arrows (outside video container for z-index) -->
+    <button class="carousel-nav carousel-nav-prev" onclick="carouselPrev(window.currentCarousel)">&#10094;</button>
+    <button class="carousel-nav carousel-nav-next" onclick="carouselNext(window.currentCarousel)">&#10095;</button>
+    
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+      <button class="indicator active" onclick="goToSlide(0)"></button>
+      <button class="indicator" onclick="goToSlide(1)"></button>
+      <button class="indicator" onclick="goToSlide(2)"></button>
+    </div>
+  </div>
+
+  <!-- Footer Bar -->
+  <footer class="footer-bar">
+    <div class="footer-content">
+      <div class="footer-item">Lumi Shalaev</div>
+      <div class="footer-item">Chicago, IL Based</div>
+      <div class="footer-item">For Inquiries Please contact <a href="mailto:lumisinquiries@icloud.com" class="footer-email">lumisinquiries@icloud.com</a></div>
+      <div class="footer-item">Website Designed by Lumi Shalaev</div>
+    </div>
+  </footer>
+
+  <script src="script.js?v=26"></script>
 </body>
 </html>
