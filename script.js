@@ -169,13 +169,8 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const page = button.getAttribute('data-page');
       if (page === 'resume') {
-        // Download resume file
-        const link = document.createElement('a');
-        link.href = 'Assets/Resume/LIGHTING Shalaev, Lumi_resume.pdf';
-        link.download = 'LIGHTING Shalaev, Lumi_resume.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        // Open resume modal instead of immediate download
+        openResumeModal();
       } else if (page === 'home' || page === 'index') {
         window.location.href = './index.html';
       } else {
@@ -183,6 +178,87 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+// Resume modal functions
+function openResumeModal() {
+  if (document.getElementById('resume-modal')) {
+    document.getElementById('resume-modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    return;
+  }
+
+  // Backdrop
+  const backdrop = document.createElement('div');
+  backdrop.className = 'resume-modal-backdrop';
+  backdrop.id = 'resume-modal-backdrop';
+
+  // Modal container
+  const modal = document.createElement('div');
+  modal.className = 'resume-modal';
+  modal.id = 'resume-modal';
+
+  // Close button (X)
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'resume-modal-close';
+  closeBtn.setAttribute('aria-label', 'Close');
+  closeBtn.innerHTML = '✕';
+  closeBtn.addEventListener('click', closeResumeModal);
+
+  // Modal content
+  const content = document.createElement('div');
+  content.className = 'resume-modal-content';
+  content.innerHTML = `<p style="margin:0 0 12px 0; font-weight:600;">Choose resume version</p>`;
+
+  // Lighting button (downloads the lighting resume)
+  const lightingBtn = document.createElement('button');
+  lightingBtn.className = 'resume-action-btn';
+  lightingBtn.textContent = 'Lighting';
+  lightingBtn.addEventListener('click', () => {
+    const link = document.createElement('a');
+    link.href = 'Assets/Resume/LIGHTING Shalaev, Lumi_resume.pdf';
+    link.download = 'LIGHTING Shalaev, Lumi_resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    closeResumeModal();
+  });
+
+  content.appendChild(lightingBtn);
+  modal.appendChild(closeBtn);
+  modal.appendChild(content);
+
+  document.body.appendChild(backdrop);
+  document.body.appendChild(modal);
+  // show
+  setTimeout(() => modal.classList.add('active'), 10);
+  backdrop.addEventListener('click', closeResumeModal);
+  document.body.style.overflow = 'hidden';
+
+  // ESC to close
+  function onKey(e) {
+    if (e.key === 'Escape') closeResumeModal();
+  }
+  document.addEventListener('keydown', onKey);
+
+  // store reference for cleanup
+  modal._cleanup = () => {
+    document.removeEventListener('keydown', onKey);
+  };
+}
+
+function closeResumeModal() {
+  const modal = document.getElementById('resume-modal');
+  const backdrop = document.getElementById('resume-modal-backdrop');
+  if (modal) {
+    modal.classList.remove('active');
+    if (modal._cleanup) modal._cleanup();
+    setTimeout(() => {
+      if (modal.parentNode) modal.parentNode.removeChild(modal);
+    }, 220);
+  }
+  if (backdrop && backdrop.parentNode) backdrop.parentNode.removeChild(backdrop);
+  document.body.style.overflow = 'auto';
+}
 });
 
 // Text Scramble Effect for Loading Screen
