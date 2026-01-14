@@ -209,17 +209,12 @@ function openResumeModal() {
   content.className = 'resume-modal-content';
   content.innerHTML = `<p style="margin:0 0 12px 0; font-weight:600;">Choose resume version</p>`;
 
-  // Lighting button (downloads the lighting resume)
+  // Lighting button (opens the lighting resume in a new tab)
   const lightingBtn = document.createElement('button');
   lightingBtn.className = 'resume-action-btn';
   lightingBtn.textContent = 'Lighting';
   lightingBtn.addEventListener('click', () => {
-    const link = document.createElement('a');
-    link.href = 'Assets/Resume/LIGHTING Shalaev, Lumi_resume.pdf';
-    link.download = 'LIGHTING Shalaev, Lumi_resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    window.open('Assets/Resume/LIGHTING Shalaev, Lumi_resume.pdf', '_blank');
     closeResumeModal();
   });
 
