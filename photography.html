@@ -15,6 +15,49 @@
       background-attachment: fixed;
       min-height: 100vh;
     }
+
+    .photo-gallery-grid {
+      column-count: 3;
+      column-gap: 30px;
+      padding: 80px 40px 60px 40px;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .photo-grid-item {
+      cursor: pointer;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      transition: transform 300ms ease, box-shadow 300ms ease;
+      margin-bottom: 30px;
+      break-inside: avoid;
+      width: 100%;
+    }
+
+    .photo-grid-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 16px 48px rgba(255, 0, 255, 0.4);
+    }
+
+    .photo-grid-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    @media (max-width: 1024px) {
+      .photo-gallery-grid {
+        column-count: 2;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .photo-gallery-grid {
+        column-count: 1;
+      }
+    }
   </style>
 </head>
 <body class="photography-page">
@@ -35,44 +78,31 @@
     </div>
   </nav>
 
-  <!-- Gallery Container -->
-  <div class="photo-gallery">
-    <div class="gallery-track">
-      <!-- Row 1: Randomized Photos (scroll right) -->
-      <div class="gallery-row gallery-row-1">
-        <div class="gallery-item gallery-item-0"><img src="Assets/Photography/Shows/Ben 1.jpg" alt="Ben 1" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-        <div class="gallery-item gallery-item-1"><img src="Assets/Photography/Street/IMG_1700.jpeg" alt="IMG 1700" data-title="" data-subtitle="12.17.24" /></div>
-        <div class="gallery-item gallery-item-2"><img src="Assets/Photography/Shows/Group 5.jpg" alt="Group 5" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-        <div class="gallery-item gallery-item-3"><img src="Assets/Photography/Street/IMG_0096.JPG" alt="IMG 0096" data-title="" data-subtitle="10.19.24" /></div>
-        <div class="gallery-item gallery-item-4"><img src="Assets/Photography/Shows/Lartey 2.jpg" alt="Lartey 2" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-        <div class="gallery-item gallery-item-5"><img src="Assets/Photography/Street/IMG_4274.jpeg" alt="IMG 4274" data-title="" data-subtitle="09.14.24" /></div>
-        <div class="gallery-item gallery-item-6"><img src="Assets/Photography/Shows/Jerome 1.jpg" alt="Jerome 1" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-        <div class="gallery-item gallery-item-7"><img src="Assets/Photography/Street/IMG_5019.JPG" alt="IMG 5019" data-title="" data-subtitle="10.08.24" /></div>
-      </div>
-      
-      <!-- Row 2: Randomized Photos (scroll left) -->
-      <div class="gallery-row gallery-row-2">
-        <div class="gallery-item gallery-item-8"><img src="Assets/Photography/Shows/Kayla 1.jpg" alt="Kayla 1" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-        <div class="gallery-item gallery-item-9"><img src="Assets/Photography/Street/IMG_7421.jpeg" alt="IMG 7421" data-title="" data-subtitle="12.01.24" /></div>
-        <div class="gallery-item gallery-item-10"><img src="Assets/Photography/Shows/Lartey 5.jpg" alt="Lartey 5" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-        <div class="gallery-item gallery-item-11"><img src="Assets/Photography/Street/IMG_2868.JPG" alt="IMG 2868" data-title="" data-subtitle="09.29.24" /></div>
-        <div class="gallery-item gallery-item-12"><img src="Assets/Photography/Shows/Jackie 3.jpg" alt="Jackie 3" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-        <div class="gallery-item gallery-item-13"><img src="Assets/Photography/Street/IMG_1419.jpeg" alt="IMG 1419" data-title="" data-subtitle="08.17.24" /></div>
-        <div class="gallery-item gallery-item-14"><img src="Assets/Photography/Shows/Group 8.jpg" alt="Group 8" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-        <div class="gallery-item gallery-item-15"><img src="Assets/Photography/Street/IMG_5878.jpeg" alt="IMG 5878" data-title="" data-subtitle="11.30.24" /></div>
-      </div>
-      
-      <!-- Row 3: Randomized Photos (scroll right) -->
-      <div class="gallery-row gallery-row-3">
-        <div class="gallery-item gallery-item-16"><img src="Assets/Photography/Shows/Group 2.jpg" alt="Group 2" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-        <div class="gallery-item gallery-item-17"><img src="Assets/Photography/Street/IMG_0208.jpeg" alt="IMG 0208" data-title="" data-subtitle="10.26.24" /></div>
-        <div class="gallery-item gallery-item-18"><img src="Assets/Photography/Shows/Group 4.jpg" alt="Group 4" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-        <div class="gallery-item gallery-item-19"><img src="Assets/Photography/Street/IMG_7281.jpeg" alt="IMG 7281" data-title="" data-subtitle="11.16.24" /></div>
-        <div class="gallery-item gallery-item-20"><img src="Assets/Photography/Shows/Lartey 1.jpg" alt="Lartey 1" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-        <div class="gallery-item gallery-item-21"><img src="Assets/Photography/Street/IMG_6959.jpeg" alt="IMG 6959" data-title="" data-subtitle="12.21.24" /></div>
-        <div class="gallery-item gallery-item-22"><img src="Assets/Photography/Shows/Group 7.jpg" alt="Group 7" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-      </div>
-    </div>
+  <!-- Gallery Grid -->
+  <div class="photo-gallery-grid">
+    <div class="photo-grid-item"><img src="Assets/Photography/Shows/Ben 1.jpg" alt="Ben 1" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Street/IMG_1700.jpeg" alt="IMG 1700" data-title="" data-subtitle="12.17.24" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Shows/Group 5.jpg" alt="Group 5" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Street/IMG_0096.JPG" alt="IMG 0096" data-title="" data-subtitle="10.19.24" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Shows/Lartey 2.jpg" alt="Lartey 2" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Street/IMG_4274.jpeg" alt="IMG 4274" data-title="" data-subtitle="09.14.24" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Shows/Jerome 1.jpg" alt="Jerome 1" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Street/IMG_5019.JPG" alt="IMG 5019" data-title="" data-subtitle="10.08.24" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Shows/Kayla 1.jpg" alt="Kayla 1" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Street/IMG_7421.jpeg" alt="IMG 7421" data-title="" data-subtitle="12.01.24" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Shows/Lartey 5.jpg" alt="Lartey 5" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Street/IMG_2868.JPG" alt="IMG 2868" data-title="" data-subtitle="09.29.24" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Shows/Jackie 3.jpg" alt="Jackie 3" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Street/IMG_1419.jpeg" alt="IMG 1419" data-title="" data-subtitle="08.17.24" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Shows/Group 8.jpg" alt="Group 8" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Street/IMG_5878.jpeg" alt="IMG 5878" data-title="" data-subtitle="11.30.24" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Shows/Group 2.jpg" alt="Group 2" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Street/IMG_0208.jpeg" alt="IMG 0208" data-title="" data-subtitle="10.26.24" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Shows/Group 4.jpg" alt="Group 4" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Street/IMG_7281.jpeg" alt="IMG 7281" data-title="" data-subtitle="11.16.24" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Shows/Lartey 1.jpg" alt="Lartey 1" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Street/IMG_6959.jpeg" alt="IMG 6959" data-title="" data-subtitle="12.21.24" /></div>
+    <div class="photo-grid-item"><img src="Assets/Photography/Shows/Group 7.jpg" alt="Group 7" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
   </div>
 
   <!-- Photo Modal -->
@@ -96,7 +126,6 @@
       <div class="footer-item">Lumi Shalaev</div>
       <div class="footer-item">Chicago, IL Based</div>
       <div class="footer-item">For Inquiries Please contact <a href="mailto:lumisinquiries@icloud.com" class="footer-email">lumisinquiries@icloud.com</a></div>
-      <div class="footer-item">Website Designed by Lumi Shalaev</div>
     </div>
   </footer>
 
@@ -108,10 +137,9 @@
     const photoModalTitle = document.getElementById('photoModalTitle');
     const photoModalSubtitle = document.getElementById('photoModalSubtitle');
     const closePhotoModal = document.getElementById('closePhotoModal');
-    const galleryItems = document.querySelectorAll('.gallery-item img');
+    const galleryItems = document.querySelectorAll('.photo-grid-item img');
 
     galleryItems.forEach(img => {
-      img.style.cursor = 'pointer';
       img.addEventListener('click', (e) => {
         photoModalImage.src = img.src;
         photoModalTitle.textContent = img.dataset.title || '';
@@ -152,17 +180,6 @@
       if (e.key === 'Escape' && photoModal.style.display === 'flex') {
         photoModal.style.display = 'none';
         document.body.style.overflow = 'auto';
-      }
-    });
-  </script>
-  <script>
-    window.addEventListener('load', () => {
-      const gallery = document.querySelector('.photo-gallery');
-      if (gallery) {
-        const scrollWidth = gallery.scrollWidth;
-        const clientWidth = gallery.clientWidth;
-        const scrollPosition = (scrollWidth - clientWidth) / 2;
-        gallery.scrollLeft = scrollPosition;
       }
     });
   </script>

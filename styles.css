@@ -1107,48 +1107,50 @@ body.lighting-page .lighting-content {
 /* Photography Gallery Styling */
 .photo-gallery {
   width: 100%;
-  height: calc(100vh - 60px);
+  height: auto;
   position: relative;
   z-index: 10;
   background: transparent;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: block;
   padding: 0;
+  min-height: calc(100vh - 60px);
 }
 
 .gallery-track {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
   padding: 60px 20px;
   width: 100%;
-  height: 100%;
-  justify-content: center;
-  perspective: 1000px;
+  height: auto;
+  max-width: 1400px;
+  margin: 0 auto;
+  perspective: none;
 }
 
 .gallery-item {
-  flex-shrink: 0;
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   transition: transform 300ms ease, box-shadow 300ms ease;
   position: relative;
-  will-change: transform;
+  width: 100%;
+  height: auto;
+  min-width: 0;
 }
 
 .gallery-item:hover {
-  transform: scale(1.08) !important;
-  box-shadow: 0 16px 48px rgba(255, 0, 255, 0.4) !important;
-  animation-play-state: paused !important;
+  transform: scale(1.02);
+  box-shadow: 0 16px 48px rgba(255, 0, 255, 0.4);
 }
 
 .gallery-item img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
+  object-fit: contain;
 }
 
 /* Position shows photos in first row */
@@ -1175,8 +1177,8 @@ body.lighting-page .lighting-content {
 .gallery-item-20,
 .gallery-item-21,
 .gallery-item-22 {
-  width: clamp(280px, 28vw, 400px);
-  height: clamp(220px, 20vw, 300px);
+  width: 100%;
+  height: auto;
 }
 
 /* Row styling */
@@ -1188,33 +1190,26 @@ body.lighting-page .lighting-content {
 }
 
 .gallery-row-1 {
-  animation: infiniteSlideRight 200s linear infinite;
+  animation: none;
 }
 
 .gallery-row-2 {
-  animation: infiniteSlideLeft 200s linear infinite;
+  animation: none;
 }
 
 .gallery-row-3 {
-  animation: infiniteSlideRight 200s linear infinite;
-  animation-delay: -50s;
+  animation: none;
 }
 
-@keyframes infiniteSlideRight {
-  from {
-    transform: translateX(-500px);
-  }
-  to {
-    transform: translateX(calc(100vw + 500px));
+@media (max-width: 1024px) {
+  .gallery-track {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@keyframes infiniteSlideLeft {
-  from {
-    transform: translateX(calc(100vw + 500px));
-  }
-  to {
-    transform: translateX(-500px);
+@media (max-width: 640px) {
+  .gallery-track {
+    grid-template-columns: 1fr;
   }
 }
 
