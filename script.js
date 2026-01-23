@@ -218,7 +218,17 @@ function openResumeModal() {
     closeResumeModal();
   });
 
+  // Sound button (opens the sound resume in a new tab)
+  const soundBtn = document.createElement('button');
+  soundBtn.className = 'resume-action-btn';
+  soundBtn.textContent = 'Sound';
+  soundBtn.addEventListener('click', () => {
+    window.open('Assets/Resume/SOUND Shalaev, Lumi_resume.pdf', '_blank');
+    closeResumeModal();
+  });
+
   content.appendChild(lightingBtn);
+  content.appendChild(soundBtn);
   modal.appendChild(closeBtn);
   modal.appendChild(content);
 

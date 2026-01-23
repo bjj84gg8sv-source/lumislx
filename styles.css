@@ -439,7 +439,7 @@ html,body { height: auto; margin: 0; padding-top: 0; font-family: Arial, Helveti
   border-radius: 6px;
   z-index: 11002;
 }
-.resume-modal-content { padding-top: 6px; display: flex; gap: 12px; align-items: center; justify-content: flex-start; }
+.resume-modal-content { padding-top: 6px; display: flex; flex-direction: column; gap: 12px; align-items: center; justify-content: center; }
 .resume-action-btn {
   background: linear-gradient(90deg,#f0f 0%, #ff5ef0 100%);
   color: #0b0b0b;
@@ -448,6 +448,7 @@ html,body { height: auto; margin: 0; padding-top: 0; font-family: Arial, Helveti
   border-radius: 8px;
   font-weight: 700;
   cursor: pointer;
+  width: auto;
 }
 .resume-action-btn:hover { transform: translateY(-2px); }
 

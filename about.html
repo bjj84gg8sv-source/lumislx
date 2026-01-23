@@ -104,16 +104,11 @@
     }
 
     .about-image {
-      width: clamp(280px, 32vw, 480px);
-      height: clamp(280px, 32vw, 480px);
-      object-fit: cover;
-      border-radius: 8px;
-      opacity: 0;
-      transition: opacity 0.5s ease-in;
+      display: none;
     }
 
     .about-image.show {
-      opacity: 1;
+      display: none;
     }
 
     .contact-info {
@@ -240,11 +235,6 @@
       txtElement.addEventListener("click", () => {
         animateText();
       });
-
-      // Show image after 2.2 seconds
-      setTimeout(() => {
-        document.querySelector(".about-image").classList.add("show");
-      }, 2200);
 
       // Show attribution after 3.2 seconds (after quote finishes)
       setTimeout(() => {
