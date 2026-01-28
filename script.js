@@ -227,8 +227,18 @@ function openResumeModal() {
     closeResumeModal();
   });
 
+  // Video button (opens the video resume in a new tab)
+  const videoBtn = document.createElement('button');
+  videoBtn.className = 'resume-action-btn';
+  videoBtn.textContent = 'Video';
+  videoBtn.addEventListener('click', () => {
+    window.open('Assets/Resume/VIDEO Shalaev, Lumi_resume.pdf', '_blank');
+    closeResumeModal();
+  });
+
   content.appendChild(lightingBtn);
   content.appendChild(soundBtn);
+  content.appendChild(videoBtn);
   modal.appendChild(closeBtn);
   modal.appendChild(content);
 
