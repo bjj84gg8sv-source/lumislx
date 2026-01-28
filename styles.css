@@ -1226,6 +1226,11 @@ body.lighting-page .lighting-content {
   align-items: center;
   justify-content: center;
   padding: 40px;
+  pointer-events: none;
+}
+
+.photo-modal.active {
+  pointer-events: auto;
 }
 
 .photo-modal-backdrop {

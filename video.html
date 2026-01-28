@@ -5,7 +5,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Video - Lumi Shalaev</title>
   <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="styles.css?v=204">
+  <link rel="stylesheet" href="styles.css?v=204">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .nav-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+    }
+
+    .video-container {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+      padding-top: 40px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .play-button-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      background: rgba(240, 0, 240, 0.8);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      transition: all 300ms ease;
+    }
+
+    .play-button-overlay:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+      background: rgba(240, 0, 240, 1);
+    }
+
+    .play-button-overlay::after {
+      content: '▶';
+      color: #0b0b0b;
+      font-size: 32px;
+      margin-left: 4px;
+    }
+
+    .play-button-overlay.hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
   <!-- Navigation Bar -->
@@ -25,25 +96,38 @@
     </div>
   </nav>
 
-  <section id="hero" class="section">
-    <div class="video-wrap">
-      <video id="bg-video" muted loop playsinline>
-        <source src="Assets/Home/main-slide.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      <div class="overlay"></div>
-    </div>
-    <div class="content">
-      <h1 class="headline top-left">Video Portfolio</h1>
-    </div>
-
-    <!-- Subtitle (morphing text) -->
-    <div id="subtitle">
-      <span id="text1"></span>
-      <span id="text2"></span>
-    </div>
-  </section>
+  <div class="video-container">
+    <video id="portfolio-video" controls playsinline>
+      <source src="Assets/Video/video_compressed.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <button class="play-button-overlay" id="play-btn"></button>
+  </div>
 
   <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const video = document.getElementById('portfolio-video');
+      const playBtn = document.getElementById('play-btn');
+
+      if (video && playBtn) {
+        // Hide play button when video starts playing
+        video.addEventListener('play', () => {
+          playBtn.classList.add('hidden');
+        });
+
+        // Show play button when video is paused
+        video.addEventListener('pause', () => {
+          playBtn.classList.remove('hidden');
+        });
+
+        // Play video with sound when button is clicked
+        playBtn.addEventListener('click', () => {
+          video.volume = 1;
+          video.play();
+        });
+      }
+    });
+  </script>
 </body>
 </html>

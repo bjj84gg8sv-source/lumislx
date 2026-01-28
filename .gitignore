@@ -1,5 +1,6 @@
 public/Assets/Home/Main*.mp4
 public/Assets/Home/Main*.mov
+Assets/Video/*.mp4
 node_modules/
 .DS_Store
 *.log

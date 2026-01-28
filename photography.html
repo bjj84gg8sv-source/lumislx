@@ -29,14 +29,14 @@
       border-radius: 8px;
       overflow: hidden;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      transition: transform 300ms ease, box-shadow 300ms ease;
+      transition: box-shadow 300ms ease, opacity 300ms ease;
       margin-bottom: 30px;
       break-inside: avoid;
       width: 100%;
     }
 
     .photo-grid-item:hover {
-      transform: scale(1.02);
+      opacity: 1.15;
       box-shadow: 0 16px 48px rgba(255, 0, 255, 0.4);
     }
 
@@ -145,6 +145,7 @@
         photoModalTitle.textContent = img.dataset.title || '';
         photoModalSubtitle.textContent = img.dataset.subtitle || '';
         photoModal.style.display = 'flex';
+        photoModal.classList.add('active');
         document.body.style.overflow = 'hidden';
 
         // Check if image is vertical after it loads
@@ -166,12 +167,14 @@
 
     closePhotoModal.addEventListener('click', () => {
       photoModal.style.display = 'none';
+      photoModal.classList.remove('active');
       document.body.style.overflow = 'auto';
     });
 
     photoModal.addEventListener('click', (e) => {
       if (e.target === photoModal || e.target === document.querySelector('.photo-modal-backdrop')) {
         photoModal.style.display = 'none';
+        photoModal.classList.remove('active');
         document.body.style.overflow = 'auto';
       }
     });
@@ -179,6 +182,7 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && photoModal.style.display === 'flex') {
         photoModal.style.display = 'none';
+        photoModal.classList.remove('active');
         document.body.style.overflow = 'auto';
       }
     });
