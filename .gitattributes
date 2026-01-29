@@ -1,1 +1,0 @@
-Assets/Video/video_compressed.mp4 filter=lfs diff=lfs merge=lfs -text
