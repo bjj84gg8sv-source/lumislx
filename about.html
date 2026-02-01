@@ -29,14 +29,18 @@
       background: #000;
       position: relative;
       padding: clamp(20px, 5vw, 60px);
+      min-height: 0;
     }
 
     .about-left {
-      flex: 0 0 66.7%;
+      flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      padding-top: clamp(40px, 15vh, 80px);
+      align-items: flex-start;
+      padding-top: clamp(40px, 8vh, 40px);
+      padding-right: 0;
+      min-width: 0;
     }
 
     .about-title {
@@ -48,15 +52,71 @@
       margin-bottom: clamp(30px, 5vh, 60px);
       opacity: 0;
       animation: fadeIn 0.8s ease-out forwards;
+      margin-top: 0;
     }
 
     .about-right {
-      position: fixed;
-      right: clamp(20px, 5vw, 60px);
-      bottom: clamp(100px, 35vh, 200px);
+      flex: 0 0 clamp(220px, 30vw, 480px);
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-end;
+      justify-content: flex-start;
+      position: relative;
+      min-width: 0;
+      height: 100%;
+      padding-top: clamp(16px, 4vw, 32px);
+      padding-right: clamp(12px, 4vw, 32px);
+    }
+
+    .about-image {
+      display: block !important;
+      width: clamp(120px, 28vw, 420px);
+      max-width: 100%;
+      border-radius: 2vw;
+      margin-bottom: clamp(18px, 4vw, 40px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      margin-top: 0;
+      align-self: flex-end;
+      height: auto;
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    .about-signature {
+      width: clamp(60px, 10vw, 180px);
+      height: auto;
+      opacity: 0.8;
+      z-index: 50;
+      margin-top: clamp(18px, 3vw, 48px);
+      margin-bottom: 0;
+      align-self: flex-end;
+      position: relative;
+      bottom: clamp(32px, 6vw, 80px);
+      right: 0;
+    }
+
+    .about-left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding-top: 16px;
+      min-width: 0;
+    }
+
+    .about-left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding-top: 0;
+      min-width: 0;
+    }
+    .about-title {
+      margin-top: 0;
+      margin-bottom: 16px;
     }
 
     .txt {
@@ -191,9 +251,16 @@
       <div class="about-title">Lumi Shalaev</div>
       <div class="txt">Don't talk about it, live it!</div>
       <div class="attribution"><i>-The Mad Ones 2017</i></div>
+      <div class="txt" style="margin-top: 60px;">
+        <div class="txt about-intro-fade" style="margin-top: 40px; opacity: 0; transition: opacity 1.2s ease;">
+          Hi, thanks for stopping by my page! I am a multi-disciplinary creative who using their knowledge to help create meaningful productions that people remember for a long time.<br><br>
+          I am primarily focused in lighting, however I am still very involved in the other areas of my work. I am also a musician who has studied music since they were 5 years old. I love working with different people from around the globe. I want to keep using my combined knowledge of the entertainment industry to keep producing high quality work in every production I am a part of!
+          
+        </div>
+      </div>
     </div>
     <div class="about-right">
-      <img class="about-image" src="Assets/About/Lumi.jpeg" alt="Lumi">
+      <img class="about-image" src="Assets/About/Lumi - 1.jpeg" alt="Lumi" />
       <img src="Assets/About/Signature.png" alt="Signature" class="about-signature" />
     </div>
   </div>
@@ -210,16 +277,17 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const titleElement = document.querySelector(".about-title");
+      const aboutImage = document.querySelector(".about-image");
       const txtElement = document.querySelector(".txt");
       const textContent = '"Don\'t talk about it, live it!"';
 
-      // Show title immediately (first)
+      // Show title and image immediately (first)
       titleElement.style.animationDelay = "0s";
+      aboutImage.style.animationDelay = "0s";
 
       // Animate quote text (second)
       const animateText = () => {
         txtElement.textContent = "";
-        
         textContent.split("").forEach((char, index) => {
           const span = document.createElement("span");
           span.textContent = char;
@@ -237,8 +305,15 @@
       });
 
       // Show attribution after 3.2 seconds (after quote finishes)
+
       setTimeout(() => {
         document.querySelector(".attribution").classList.add("show");
+        // Wait for attribution fade-in (2s) before showing intro
+        setTimeout(() => {
+          document.querySelectorAll('.about-intro-fade').forEach(el => {
+            el.style.opacity = 1;
+          });
+        }, 2000);
       }, 3200);
 
       // Show signature after 4.5 seconds with fade in

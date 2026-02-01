@@ -1,3 +1,48 @@
+/* Wrapper for About page main content */
+.about-content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #000;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-main-center {
+  display: block;
+  padding-bottom: 0;
+}
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+}
+/* About message box */
+.about-message-box {
+  position: static;
+  margin: 0 auto;
+  background: #fff;
+  color: #222;
+  font-family: 'DreamOrphans', Arial, Helvetica, sans-serif;
+  font-size: clamp(18px, 3vw, 24px);
+  border-radius: 18px;
+  padding: clamp(40px, 6vw, 56px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  max-width: 600px;
+  width: 90%;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  opacity: 1;
+  display: block;
+  text-align: center;
+  white-space: pre-line;
+  z-index: 200;
+}
 /* Fullscreen video background */
 * { box-sizing: border-box; }
 html,body { height: auto; margin: 0; padding-top: 0; font-family: Arial, Helvetica, sans-serif; min-width: 320px; overflow-x: hidden; }
@@ -340,10 +385,14 @@ html,body { height: auto; margin: 0; padding-top: 0; font-family: Arial, Helveti
   opacity: 0;
   transition: opacity 1200ms ease;
   z-index: 3;
-}
-#gallery.show .full-image {
-  opacity: 1;
-}
+  /* Fade-in for About intro text */
+  .about-intro-fade {
+    opacity: 0;
+    transition: opacity 2.2s ease;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
 /* Loading Screen */
 .loading-screen {
@@ -383,9 +432,8 @@ html,body { height: auto; margin: 0; padding-top: 0; font-family: Arial, Helveti
 }
 
 /* Signature */
-.signature {
   position: fixed;
-  bottom: 20px;
+  bottom: 60px;
   right: 20px;
   width: 120px;
   height: auto;
@@ -931,20 +979,20 @@ body.lighting-page .lighting-content {
   width: 100vw;
   height: 100vh;
   gap: 20px;
-  z-index: 2;
-}
-
-.modal-title {
-  color: #f0f;
-  font-size: clamp(20px, 4vw, 32px);
-  font-weight: 300;
-  margin: 0;
-  letter-spacing: 0.05em;
-  text-align: center;
-  flex-shrink: 0;
-}
-
-/* Carousel Styles */
+  .txt {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    line-height: 1.6;
+    color: #222;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    padding: 1.2em 2em;
+    margin-bottom: 1.5em;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    word-break: break-word;
+  }
 .carousel-container {
   position: relative;
   width: 100%;
@@ -1054,6 +1102,7 @@ body.lighting-page .lighting-content {
   justify-content: center;
   border-top: 1px solid rgba(255, 0, 255, 0.2);
   position: relative;
+  width: 100%;
   z-index: 100;
 }
 
