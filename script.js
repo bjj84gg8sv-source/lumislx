@@ -636,6 +636,19 @@ function updateCarousel(carouselData = videos) {
   const modalPdf = document.getElementById('modal-pdf');
   
   if (modal && carouselData[currentSlide]) {
+    // Always show carousel arrows
+    const prevArrow = document.querySelector('.carousel-nav-prev');
+    const nextArrow = document.querySelector('.carousel-nav-next');
+    if (prevArrow) {
+      prevArrow.style.display = 'flex';
+      prevArrow.style.opacity = '1';
+      prevArrow.style.visibility = 'visible';
+    }
+    if (nextArrow) {
+      nextArrow.style.display = 'flex';
+      nextArrow.style.opacity = '1';
+      nextArrow.style.visibility = 'visible';
+    }
     const slide = carouselData[currentSlide];
     
     // Hide all by default

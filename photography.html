@@ -6,57 +6,162 @@
   <title>Photography - Lumi Shalaev</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="styles.css?v=204">
+  <script src="https://cdn.jsdelivr.net/npm/magic-grid@3.1.2/dist/magic-grid.min.js"></script>
   <style>
+    /* Force footer styles for Photography page */
+    .footer-bar {
+      background: rgba(0, 0, 0, 0.7) !important;
+      backdrop-filter: blur(10px) !important;
+      height: 60px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      border-top: 1px solid rgba(255, 0, 255, 0.2) !important;
+      position: relative !important;
+      width: 100% !important;
+      z-index: 100 !important;
+    }
+    .footer-content {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-around !important;
+      width: 100% !important;
+      max-width: 1400px !important;
+      padding: 0 40px !important;
+      gap: 30px !important;
+    }
+    .footer-item {
+      color: #fff !important;
+      font-size: 14px !important;
+      font-family: 'DreamOrphans', Arial, sans-serif !important;
+      text-align: center !important;
+      flex: 1 !important;
+      white-space: nowrap !important;
+    }
+    .footer-email {
+      color: #f0f !important;
+      letter-spacing: 0.08em !important;
+      text-decoration: none !important;
+    }
+    .footer-email:hover {
+      opacity: 0.8 !important;
+    }
     body.photography-page {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('Assets/Photography/Photo Background.jpeg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
+      background: #222;
       min-height: 100vh;
     }
-
-    .photo-gallery-grid {
-      column-count: 3;
-      column-gap: 30px;
-      padding: 80px 40px 60px 40px;
+    .magic-grid-demo {
+      width: 100%;
+      max-width: 1400px;
+      margin: 60px auto 0 auto;
+      position: relative;
+      padding: 0;
+    }
+    @media (max-width: 450px) {
+      .magic-grid-demo {
+        grid-template-columns: 1fr;
+      }
+    }
+    .magic-grid-demo .grid-item {
+      color: #222;
+      font-size: 2rem;
+      font-weight: bold;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      width: 420px;
       max-width: 100%;
-      margin: 0 auto;
-    }
-
-    .photo-grid-item {
-      cursor: pointer;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      transition: box-shadow 300ms ease, opacity 300ms ease;
-      margin-bottom: 30px;
-      break-inside: avoid;
-      width: 100%;
-    }
-
-    .photo-grid-item:hover {
-      opacity: 1.15;
-      box-shadow: 0 16px 48px rgba(255, 0, 255, 0.4);
-    }
-
-    .photo-grid-item img {
-      width: 100%;
       height: auto;
+      padding: 0;
+      margin: 0 0 16px 0;
       display: block;
-      object-fit: contain;
+      box-sizing: border-box;
+    }
+    .magic-grid-demo .grid-item {
+      position: relative;
+    }
+    .magic-grid-demo .grid-item img,
+    #modalImg {
+      display: block;
+      width: 100%;
+      max-width: 700px;
+      height: auto;
+      max-height: 900px;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      border-radius: 12px;
+      transition: box-shadow 0.25s, filter 0.25s;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .magic-grid-demo .grid-item::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 16px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.25s;
+      box-shadow: 0 0 0 0 #ff00ff, 0 0 0 0 #fff;
+    }
+    .magic-grid-demo .grid-item:hover img {
+      box-shadow: 0 0 16px 4px #ff00ff88, 0 0 32px 8px #ff00ff44, 0 8px 32px rgba(0,0,0,0.18);
+      filter: brightness(1.06) saturate(1.15);
+      z-index: 2;
+    }
+    .magic-grid-demo .grid-item:hover::after {
+      opacity: 1;
+      box-shadow: 0 0 24px 8px #ff00ff44, 0 0 48px 16px #ff00ff22;
+    }
+    .magic-grid-demo .grid-item img:hover {
+      box-shadow: 0 0 16px 4px #ff00ff88, 0 0 32px 8px #ff00ff44, 0 8px 32px rgba(0,0,0,0.18);
+      filter: brightness(1.06) saturate(1.15);
+      z-index: 2;
     }
 
-    @media (max-width: 1024px) {
-      .photo-gallery-grid {
-        column-count: 2;
-      }
+    /* Modal styles */
+    .photo-modal {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(20, 0, 30, 0.92);
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.2s;
     }
-
-    @media (max-width: 640px) {
-      .photo-gallery-grid {
-        column-count: 1;
-      }
+    .photo-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+    .photo-modal img {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+      background: #222;
+    }
+    .photo-modal .close-btn {
+      position: absolute;
+      top: 32px;
+      right: 48px;
+      font-size: 2.5rem;
+      color: #fff;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 10001;
+      filter: drop-shadow(0 2px 8px #000);
+      transition: color 0.2s;
+    }
+    .photo-modal .close-btn:hover {
+      color: #ff00ff;
     }
   </style>
 </head>
@@ -78,50 +183,21 @@
     </div>
   </nav>
 
-  <!-- Gallery Grid -->
-  <div class="photo-gallery-grid">
-    <!-- Newest to oldest, all from Assets/Photography/Photos/ by file creation date -->
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/Lumi - 3.jpeg" alt="Lumi - 3" data-title="" data-subtitle="" /></div>
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/Lumi - 5.jpeg" alt="Lumi - 5" data-title="" data-subtitle="" /></div>
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/Lumi - 4.jpeg" alt="Lumi - 4" data-title="" data-subtitle="" /></div>
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/Lumi - 1.jpeg" alt="Lumi - 1" data-title="" data-subtitle="" /></div>
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/Lartey 5.jpg" alt="Lartey 5" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/Lartey 2.jpg" alt="Lartey 2" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/Jackie 3.jpg" alt="Jackie 3" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/IMG_1700.jpeg" alt="IMG 1700" data-title="" data-subtitle="12.17.24" /></div>
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/IMG_7281.jpeg" alt="IMG 7281" data-title="" data-subtitle="11.16.24" /></div>
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/Jerome 1.jpg" alt="Jerome 1" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/IMG_5878.jpeg" alt="IMG 5878" data-title="" data-subtitle="11.30.24" /></div>
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/Lartey 1.jpg" alt="Lartey 1" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/IMG_5019.JPG" alt="IMG 5019" data-title="" data-subtitle="10.08.24" /></div>
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/IMG_2868.JPG" alt="IMG 2868" data-title="" data-subtitle="09.29.24" /></div>
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/IMG_4274.jpeg" alt="IMG 4274" data-title="" data-subtitle="09.14.24" /></div>
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/Group 7.jpg" alt="Group 7" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/Group 8.jpg" alt="Group 8" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/Group 5.jpg" alt="Group 5" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/Group 4.jpg" alt="Group 4" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/IMG_0096.JPG" alt="IMG 0096" data-title="" data-subtitle="10.19.24" /></div>
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/Group 2.jpg" alt="Group 2" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
-    <div class="photo-grid-item"><img loading="lazy" src="Assets/Photography/Photos/Ben 1.jpg" alt="Ben 1" data-title="Parkside Mix and Range Concert" data-subtitle="11.12.25" /></div>
+  <!-- Magic Grid Demo Content from GitHub -->
+  <div class="magic-grid-demo" id="magic-grid-demo">
+    <!-- Images will be inserted here by JS -->
+  </div>
+  <!-- Modal for enlarged photo -->
+  <div class="photo-modal" id="photoModal">
+    <button class="close-btn" id="closeModalBtn" aria-label="Close">&times;</button>
+    <img id="modalImg" src="" alt="Enlarged photo" draggable="false" oncontextmenu="return false;" />
   </div>
 
-  <!-- Photo Modal -->
-  <div id="photoModal" class="photo-modal" style="display: none;">
-    <div class="photo-modal-backdrop"></div>
-    <div class="photo-modal-content">
-      <div class="photo-modal-wrapper">
-        <div class="photo-modal-text">
-          <h2 id="photoModalTitle" class="photo-modal-title"></h2>
-          <p id="photoModalSubtitle" class="photo-modal-subtitle"></p>
-        </div>
-        <img id="photoModalImage" src="" alt="Full size photo" />
-      </div>
-      <button id="closePhotoModal" class="photo-modal-close">✕</button>
-    </div>
-  </div>
+
 
   <!-- Footer Bar -->
-  <footer class="footer-bar">
+
+  <footer class="footer-bar" id="footerBar" style="opacity:1;transition:opacity 0.7s cubic-bezier(.4,0,.2,1);">
     <div class="footer-content">
       <div class="footer-item">Lumi Shalaev</div>
       <div class="footer-item">Chicago, IL Based</div>
@@ -129,63 +205,94 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
-  <script>
-    // Photo gallery modal functionality
-    const photoModal = document.getElementById('photoModal');
-    const photoModalImage = document.getElementById('photoModalImage');
-    const photoModalTitle = document.getElementById('photoModalTitle');
-    const photoModalSubtitle = document.getElementById('photoModalSubtitle');
-    const closePhotoModal = document.getElementById('closePhotoModal');
-    const galleryItems = document.querySelectorAll('.photo-grid-item img');
+    <script src="https://cdn.jsdelivr.net/npm/magic-grid@3.1.2/dist/magic-grid.min.js"></script>
+    <script>
+      // List of photo filenames in creation order (oldest to newest)
+      // To update: add new filenames to this array in the order you want them to appear
+      const photoFiles = [
+        "Ben 1.jpg",
+        "Group 2.jpg",
+        "Group 4.jpg",
+        "Group 5.jpg",
+        "Group 7.jpg",
+        "Group 8.jpg",
+        "IMG_0096.JPG",
+        "IMG_1700.jpeg",
+        "IMG_2868.JPG",
+        "IMG_4274.jpeg",
+        "IMG_5019.JPG",
+        "IMG_5878.jpeg",
+        "IMG_7281.jpeg",
+        "Jackie 3.jpg",
+        "Jerome 1.jpg",
+        "Lartey 1.jpg",
+        "Lartey 2.jpg",
+        "Lartey 5.jpg",
+        "Lumi - 1.jpeg",
+        "Lumi - 3.jpeg",
+        "Lumi - 4.jpeg",
+        "Lumi - 5.jpeg"
+      ];
 
-    galleryItems.forEach(img => {
-      img.addEventListener('click', (e) => {
-        photoModalImage.src = img.src;
-        photoModalTitle.textContent = img.dataset.title || '';
-        photoModalSubtitle.textContent = img.dataset.subtitle || '';
-        photoModal.style.display = 'flex';
-        photoModal.classList.add('active');
+      function createPhotoTile(filename) {
+        const div = document.createElement('div');
+        div.className = 'grid-item';
+        const img = document.createElement('img');
+        img.src = `Assets/Photography/Photos/${filename}`;
+        img.alt = filename;
+        img.loading = 'lazy';
+        img.style.width = '100%';
+        img.style.height = 'auto';
+        img.setAttribute('draggable', 'false');
+        img.setAttribute('oncontextmenu', 'return false;');
+        img.addEventListener('click', function() {
+          openPhotoModal(img.src, img.alt);
+        });
+        div.appendChild(img);
+        return div;
+      }
+
+      // Modal logic
+      function openPhotoModal(src, alt) {
+        const modal = document.getElementById('photoModal');
+        const modalImg = document.getElementById('modalImg');
+        modalImg.src = src;
+        modalImg.alt = alt;
+        modal.classList.add('active');
         document.body.style.overflow = 'hidden';
-
-        // Check if image is vertical after it loads
-        const checkAndSetVertical = () => {
-          if (photoModalImage.naturalHeight > photoModalImage.naturalWidth) {
-            photoModalImage.classList.add('vertical');
-          } else {
-            photoModalImage.classList.remove('vertical');
-          }
-        };
-
-        if (photoModalImage.complete) {
-          checkAndSetVertical();
-        } else {
-          photoModalImage.addEventListener('load', checkAndSetVertical, { once: true });
-        }
+      }
+      function closePhotoModal() {
+        const modal = document.getElementById('photoModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+          document.getElementById('modalImg').src = '';
+        }, 200);
+      }
+      document.getElementById('closeModalBtn').addEventListener('click', closePhotoModal);
+      document.getElementById('photoModal').addEventListener('click', function(e) {
+        if (e.target === this) closePhotoModal();
       });
-    });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closePhotoModal();
+      });
 
-    closePhotoModal.addEventListener('click', () => {
-      photoModal.style.display = 'none';
-      photoModal.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    });
+      document.addEventListener('DOMContentLoaded', function() {
+        // Navigation bar logic handled by script.js
 
-    photoModal.addEventListener('click', (e) => {
-      if (e.target === photoModal || e.target === document.querySelector('.photo-modal-backdrop')) {
-        photoModal.style.display = 'none';
-        photoModal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && photoModal.style.display === 'flex') {
-        photoModal.style.display = 'none';
-        photoModal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-      }
-    });
-  </script>
-</body>
-</html>
+        const grid = document.getElementById('magic-grid-demo');
+        grid.innerHTML = '';
+        photoFiles.slice().reverse().forEach(f => grid.appendChild(createPhotoTile(f)));
+        var magicGrid = new MagicGrid({
+          container: '#magic-grid-demo',
+          static: true,
+          animate: true,
+          gutter: 30,
+          columns: 3
+        });
+        magicGrid.listen();
+      });
+    </script>
+    <script src="script.js"></script>
+  </body>
+  </html>

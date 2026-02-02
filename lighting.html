@@ -10,6 +10,44 @@
   <link rel="preload" as="video" href="Assets/Lighting/Lx portfolio/CCM.mp4">
     <link rel="stylesheet" href="styles.css?v=204">
   <style>
+    /* Force footer styles for Lighting page */
+    .footer-bar {
+      background: rgba(0, 0, 0, 0.7) !important;
+      backdrop-filter: blur(10px) !important;
+      height: 60px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      border-top: 1px solid rgba(255, 0, 255, 0.2) !important;
+      position: relative !important;
+      width: 100% !important;
+      z-index: 100 !important;
+    }
+    .footer-content {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-around !important;
+      width: 100% !important;
+      max-width: 1400px !important;
+      padding: 0 40px !important;
+      gap: 30px !important;
+    }
+    .footer-item {
+      color: #fff !important;
+      font-size: 14px !important;
+      font-family: 'DreamOrphans', Arial, sans-serif !important;
+      text-align: center !important;
+      flex: 1 !important;
+      white-space: nowrap !important;
+    }
+    .footer-email {
+      color: #f0f !important;
+      letter-spacing: 0.08em !important;
+      text-decoration: none !important;
+    }
+    .footer-email:hover {
+      opacity: 0.8 !important;
+    }
     body.lighting-page {
       background-image: linear-gradient(rgba(100, 0, 50, 0.85), rgba(100, 0, 50, 0.85)), url('Assets/Lighting/Lighting Background.jpeg');
       background-size: cover;
@@ -109,7 +147,7 @@
     </div>
     <div class="video-item">
       <div class="video-wrapper clickable-video" data-video-src="Assets/Lighting/Lx portfolio/Tea Cover.png" onclick="openVideoModal(this)">
-        <img src="Assets/Lighting/Lx portfolio/Tea Cover.png" style="width: 100%; height: 100%; object-fit: cover;" />
+        <img src="Assets/Lighting/Lx portfolio/Tea Cover.png" style="width: 100%; height: 100%; object-fit: cover;" draggable="false" oncontextmenu="return false;" />
         <div class="click-for-more">Click for more</div>
       </div>
     </div>
@@ -157,16 +195,14 @@
           <source src="" type="video/mp4" controlsList="nodownload">
           Your browser does not support the video tag.
         </video>
-        <img id="modal-image" style="display: none; width: 100%; height: 100%; object-fit: contain;" />
+        <img id="modal-image" style="display: none; width: 100%; height: 100%; object-fit: contain;" draggable="false" oncontextmenu="return false;" />
         <iframe id="modal-youtube" style="display: none; width: 100%; height: 100%; border: none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <iframe id="modal-pdf" style="display: none; width: 100%; height: 100%; border: none;" type="application/pdf"></iframe>
+        <!-- Navigation Arrows (inside video-modal-content for z-index) -->
+        <button class="carousel-nav carousel-nav-prev" onclick="carouselPrev(window.currentCarousel)">&#10094;</button>
+        <button class="carousel-nav carousel-nav-next" onclick="carouselNext(window.currentCarousel)">&#10095;</button>
       </div>
     </div>
-    
-    <!-- Navigation Arrows (outside video container for z-index) -->
-    <button class="carousel-nav carousel-nav-prev" onclick="carouselPrev(window.currentCarousel)">&#10094;</button>
-    <button class="carousel-nav carousel-nav-next" onclick="carouselNext(window.currentCarousel)">&#10095;</button>
-    
     <!-- Indicators -->
     <div class="carousel-indicators">
       <button class="indicator active" onclick="goToSlide(0)"></button>

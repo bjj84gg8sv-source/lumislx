@@ -7,14 +7,70 @@
   <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="styles.css?v=204">
   <style>
+        html, body.about-page {
+          height: 100vh !important;
+          overflow: hidden !important;
+        }
+
+        @media (max-width: 900px), (max-height: 700px) {
+          html, body.about-page {
+            height: auto !important;
+            overflow: auto !important;
+          }
+        }
+    /* Force footer styles for About page */
+    .footer-bar {
+      background: rgba(0, 0, 0, 0.7) !important;
+      backdrop-filter: blur(10px) !important;
+      height: 60px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      border-top: 1px solid rgba(255, 0, 255, 0.2) !important;
+      position: relative !important;
+      width: 100% !important;
+      z-index: 100 !important;
+    }
+    .footer-content {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-around !important;
+      width: 100% !important;
+      max-width: 1400px !important;
+      padding: 0 40px !important;
+      gap: 30px !important;
+    }
+    .footer-item {
+      color: #fff !important;
+      font-size: 14px !important;
+      font-family: 'DreamOrphans', Arial, sans-serif !important;
+      text-align: center !important;
+      flex: 1 !important;
+      white-space: nowrap !important;
+    }
+    .footer-email {
+      color: #f0f !important;
+      letter-spacing: 0.08em !important;
+      text-decoration: none !important;
+    }
+    .footer-email:hover {
+      opacity: 0.8 !important;
+    }
     @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
 
     body.about-page {
-      height: 100vh;
+      min-height: 100vh;
       background: #000;
-      overflow: hidden;
       display: flex;
       flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Allow scrolling on smaller screens */
+    @media (max-width: 900px), (max-height: 700px) {
+      body.about-page {
+        overflow: auto;
+      }
     }
 
     .nav-bar {
@@ -248,20 +304,22 @@
 
   <div class="about-container">
     <div class="about-left">
-      <div class="about-title">Lumi Shalaev</div>
+      <div class="about-title lookin-diamonds">Lumi Shalaev</div>
       <div class="txt">Don't talk about it, live it!</div>
       <div class="attribution"><i>-The Mad Ones 2017</i></div>
       <div class="txt" style="margin-top: 60px;">
         <div class="txt about-intro-fade" style="margin-top: 40px; opacity: 0; transition: opacity 1.2s ease;">
           Hi, thanks for stopping by my page! I am a multi-disciplinary creative who using their knowledge to help create meaningful productions that people remember for a long time.<br><br>
           I am primarily focused in lighting, however I am still very involved in the other areas of my work. I am also a musician who has studied music since they were 5 years old. I love working with different people from around the globe. I want to keep using my combined knowledge of the entertainment industry to keep producing high quality work in every production I am a part of!
+          <style>.about-intro-fade { transition: opacity 3s ease !important; }</style>
+          <style>.about-intro-fade { transition: opacity 2.2s ease !important; }</style>
           
         </div>
       </div>
     </div>
     <div class="about-right">
-      <img class="about-image" src="Assets/About/Lumi - 1.jpeg" alt="Lumi" />
-      <img src="Assets/About/Signature.png" alt="Signature" class="about-signature" />
+      <img class="about-image" src="Assets/About/Lumi - 1.jpeg" alt="Lumi" draggable="false" oncontextmenu="return false;" />
+      <img src="Assets/About/Signature.png" alt="Signature" class="about-signature" draggable="false" oncontextmenu="return false;" />
     </div>
   </div>
 
@@ -291,6 +349,7 @@
         textContent.split("").forEach((char, index) => {
           const span = document.createElement("span");
           span.textContent = char;
+          // Each letter fades in sequentially, starting at 1.2s
           span.style.animationDelay = `${1.2 + index * 0.05}s`;
           span.style.display = "inline";
           span.style.whiteSpace = "normal";
@@ -304,19 +363,19 @@
         animateText();
       });
 
-      // Show attribution after 3.2 seconds (after quote finishes)
-
+      // Show attribution after 2 seconds
       setTimeout(() => {
         document.querySelector(".attribution").classList.add("show");
-        // Wait for attribution fade-in (2s) before showing intro
-        setTimeout(() => {
-          document.querySelectorAll('.about-intro-fade').forEach(el => {
-            el.style.opacity = 1;
-          });
-        }, 2000);
-      }, 3200);
+      }, 2000);
 
-      // Show signature after 4.5 seconds with fade in
+      // Show intro paragraph after 3 seconds
+      setTimeout(() => {
+        document.querySelectorAll('.about-intro-fade').forEach(el => {
+          el.style.opacity = 1;
+        });
+      }, 3000);
+
+      // Show signature after 4.5 seconds with fade in (unchanged)
       setTimeout(() => {
         document.querySelector(".about-signature").classList.add("show");
       }, 4500);
