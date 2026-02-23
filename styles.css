@@ -1,3 +1,35 @@
+/* Force hide modal carousel indicators and circles */
+.carousel-indicators, .indicator {
+  display: none !important;
+}
+/* Modal backdrop tint for video modal */
+.video-modal.active .video-modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+  display: block;
+  pointer-events: auto;
+  transition: background 0.3s;
+}
+.video-modal .video-modal-backdrop {
+  display: none;
+}
+.video-modal.active .video-modal-wrapper {
+  position: relative;
+  z-index: 2;
+}
+/* Ensure modal is visible and on top when active */
+.video-modal.active {
+  display: flex !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  z-index: 99999 !important;
+}
+
 /* Decorative font for About page title */
 .lookin-diamonds {
   font-family: 'LookinDiamonds', Arial, sans-serif !important;
@@ -1110,7 +1142,7 @@ body.lighting-page .lighting-content {
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  display: flex;
+  display: none; /* Hide indicators by default */
   gap: 10px;
   z-index: 10003;
   pointer-events: auto;
@@ -1126,6 +1158,7 @@ body.lighting-page .lighting-content {
   transition: all 300ms ease;
   padding: 0;
   pointer-events: auto !important;
+  display: none; /* Hide indicator circles by default */
 }
 
 .indicator.active {
