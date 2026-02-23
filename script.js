@@ -1,3 +1,16 @@
+// Add delegated click event listeners for all .video-wrapper.clickable-video elements
+document.addEventListener('DOMContentLoaded', () => {
+  const clickableVideos = document.querySelectorAll('.video-wrapper.clickable-video');
+  console.log('[DEBUG] Found', clickableVideos.length, '.video-wrapper.clickable-video elements');
+  clickableVideos.forEach(el => {
+    el.addEventListener('click', function() {
+      console.log('[DEBUG] Clicked video-wrapper', this);
+      openVideoModal(this);
+    });
+  });
+  console.log('[DEBUG] Delegated click listeners attached to .video-wrapper.clickable-video');
+});
+console.log('[DEBUG] script.js loaded');
 // Carousel state - MUST be at top before any functions use it
 let currentSlide = 0;
 const videos = [
@@ -328,32 +341,29 @@ class TextScramble {
   }
 }
 
-// Initialize scramble effect on loading text
+// Initialize scramble effect on loading text, but only if scrambleText exists
 const scrambleEl = document.getElementById('scrambleText');
-const fxScramble = new TextScramble(scrambleEl);
-
-// Animate the loading text
-const textSequence = ['L.', 'LO', 'LOA', 'LOAD', 'LOADI', 'LOADIN', 'LOADING'];
-let sequenceIndex = 0;
-
-const animateSequence = () => {
-  if (sequenceIndex < textSequence.length) {
-    fxScramble.setText(textSequence[sequenceIndex]).then(() => {
-      sequenceIndex++;
-      setTimeout(animateSequence, 50);
-    });
-  }
-};
-
-animateSequence();
-
+if (scrambleEl) {
+  const fxScramble = new TextScramble(scrambleEl);
+  // Animate the loading text
+  const textSequence = ['L.', 'LO', 'LOA', 'LOAD', 'LOADI', 'LOADIN', 'LOADING'];
+  let sequenceIndex = 0;
+  const animateSequence = () => {
+    if (sequenceIndex < textSequence.length) {
+      fxScramble.setText(textSequence[sequenceIndex]).then(() => {
+        sequenceIndex++;
+        setTimeout(animateSequence, 50);
+      });
+    }
+  };
+  animateSequence();
+}
 // Hide loading screen after 2.5 seconds
 setTimeout(() => {
   const loadingScreen = document.getElementById("loadingScreen");
   if (loadingScreen) {
     loadingScreen.classList.add("hidden");
   }
-  
   // Play the video at the 2.5 second mark
   const bgVideo = document.getElementById("bg-video");
   if (bgVideo) {
@@ -361,97 +371,7 @@ setTimeout(() => {
   }
 }, 2500);
 
-// Morphing text effect
-const elts = {
-    text1: document.getElementById("text1"),
-    text2: document.getElementById("text2")
-};
 
-console.log("elts.text1:", elts.text1);
-console.log("elts.text2:", elts.text2);
-
-const texts = [
-    "Production Manager",
-    "Lighting Designer",
-    "Lighting Technician",
-    "Sound Technician",
-    "Projections Designer",
-    "A/V Operator",
-    "Photographer"
-];
-
-const morphTime = 1.5;
-const cooldownTime = 1;
-
-let textIndex = texts.length - 1;
-let time = new Date();
-let morph = 0;
-let cooldown = cooldownTime;
-
-elts.text1.textContent = texts[textIndex % texts.length];
-elts.text2.textContent = texts[(textIndex + 1) % texts.length];
-
-function doMorph() {
-    morph -= cooldown;
-    cooldown = 0;
-
-    let fraction = morph / morphTime;
-
-    if (fraction > 1) {
-        cooldown = cooldownTime;
-        fraction = 1;
-    }
-
-    setMorph(fraction);
-}
-
-function setMorph(fraction) {
-    elts.text2.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
-    elts.text2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
-
-    fraction = 1 - fraction;
-    elts.text1.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
-    elts.text1.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
-
-    elts.text1.textContent = texts[textIndex % texts.length];
-    elts.text2.textContent = texts[(textIndex + 1) % texts.length];
-}
-
-function doCooldown() {
-    morph = 0;
-
-    elts.text2.style.filter = "";
-    elts.text2.style.opacity = "100%";
-
-    elts.text1.style.filter = "";
-    elts.text1.style.opacity = "0%";
-}
-
-function animate() {
-    requestAnimationFrame(animate);
-
-    let newTime = new Date();
-    let shouldIncrementIndex = cooldown > 0;
-    let dt = (newTime - time) / 1000;
-    time = newTime;
-
-    cooldown -= dt;
-
-    if (cooldown <= 0) {
-        if (shouldIncrementIndex) {
-            textIndex++;
-        }
-
-        doMorph();
-    } else {
-        doCooldown();
-    }
-}
-
-// Start morphing animation after loading screen is done (2.5 seconds)
-setTimeout(() => {
-  animate();
-}, 2500);
 
 // Fade out subtitle as gallery section becomes visible
 const subtitle = document.getElementById("subtitle");
@@ -504,9 +424,11 @@ if (galleryImage) {
 
 // Simple global video modal functions
 function openVideoModal(element) {
-  console.log('openVideoModal called');
+  // Ensure global access for inline onclick
+  window.openVideoModal = openVideoModal;
+  console.log('[DEBUG] openVideoModal called', element);
   const videoSrc = element.getAttribute('data-video-src');
-  console.log('Video src:', videoSrc);
+  console.log('[DEBUG] Video src:', videoSrc);
   
   currentSlide = 0; // Reset to first slide
   let activeCarousel = videos;
@@ -562,6 +484,8 @@ function openVideoModal(element) {
     
     updateCarousel(activeCarousel);
     modal.classList.add('active');
+    console.log('[DEBUG] Modal element after activation:', modal);
+    console.log('[DEBUG] Modal classList:', modal.classList.value);
     document.body.style.overflow = 'hidden';
     console.log('Modal opened');
   } else {
@@ -570,6 +494,8 @@ function openVideoModal(element) {
 }
 
 function closeVideoModal() {
+  // Ensure global access for inline onclick
+  window.closeVideoModal = closeVideoModal;
   console.log('closeVideoModal called');
   const modal = document.getElementById('video-modal');
   const modalVideo = document.getElementById('modal-video');
@@ -628,6 +554,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function updateCarousel(carouselData = videos) {
+  window.updateCarousel = updateCarousel;
   const modal = document.getElementById('video-modal');
   const modalTitle = document.getElementById('modal-title');
   const modalVideo = document.getElementById('modal-video');
@@ -720,18 +647,21 @@ function updateCarousel(carouselData = videos) {
 }
 
 function carouselNext(carouselData = videos) {
+  window.carouselNext = carouselNext;
   console.log('carouselNext called');
   currentSlide = (currentSlide + 1) % carouselData.length;
   updateCarousel(carouselData);
 }
 
 function carouselPrev(carouselData = videos) {
+  window.carouselPrev = carouselPrev;
   console.log('carouselPrev called');
   currentSlide = (currentSlide - 1 + carouselData.length) % carouselData.length;
   updateCarousel(carouselData);
 }
 
 function goToSlide(index, carouselData = videos) {
+  window.goToSlide = goToSlide;
   console.log('goToSlide called with index:', index);
   if (index >= 0 && index < carouselData.length) {
     currentSlide = index;

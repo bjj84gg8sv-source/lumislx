@@ -209,30 +209,18 @@
     <script>
       // List of photo filenames in creation order (oldest to newest)
       // To update: add new filenames to this array in the order you want them to appear
+      // Dynamically generated from directory listing
       const photoFiles = [
-        "Ben 1.jpg",
-        "Group 2.jpg",
-        "Group 4.jpg",
-        "Group 5.jpg",
-        "Group 7.jpg",
-        "Group 8.jpg",
-        "IMG_0096.JPG",
-        "IMG_1700.jpeg",
-        "IMG_2868.JPG",
-        "IMG_4274.jpeg",
-        "IMG_5019.JPG",
-        "IMG_5878.jpeg",
-        "IMG_7281.jpeg",
-        "Jackie 3.jpg",
-        "Jerome 1.jpg",
-        "Lartey 1.jpg",
-        "Lartey 2.jpg",
-        "Lartey 5.jpg",
-        "Lumi - 1.jpeg",
-        "Lumi - 3.jpeg",
-        "Lumi - 4.jpeg",
-        "Lumi - 5.jpeg"
+        "1.JPG","2.JPG","3.jpeg","4.jpeg","5.jpeg","6.jpeg","7.JPG","8.jpg","9.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg","17.jpg","18.jpg","19.jpeg","20.jpeg","21.jpeg","22.jpeg","23.jpg","24.jpg","25.jpg"
       ];
+
+      // Sort numerically by filename (highest number first)
+      photoFiles.sort((a, b) => {
+        // Extract leading number from filename
+        const numA = parseInt(a.match(/\d+/)?.[0] || '0', 10);
+        const numB = parseInt(b.match(/\d+/)?.[0] || '0', 10);
+        return numB - numA;
+      });
 
       function createPhotoTile(filename) {
         const div = document.createElement('div');
@@ -241,6 +229,8 @@
         img.src = `Assets/Photography/Photos/${filename}`;
         img.alt = filename;
         img.loading = 'lazy';
+        img.decoding = 'async';
+        img.setAttribute('fetchpriority', 'low');
         img.style.width = '100%';
         img.style.height = 'auto';
         img.setAttribute('draggable', 'false');
@@ -282,15 +272,63 @@
 
         const grid = document.getElementById('magic-grid-demo');
         grid.innerHTML = '';
-        photoFiles.slice().reverse().forEach(f => grid.appendChild(createPhotoTile(f)));
-        var magicGrid = new MagicGrid({
-          container: '#magic-grid-demo',
-          static: true,
-          animate: true,
-          gutter: 30,
-          columns: 3
-        });
-        magicGrid.listen();
+        const tiles = photoFiles.map(f => createPhotoTile(f));
+        tiles.forEach(tile => grid.appendChild(tile));
+
+        // Wait for all images to load before initializing MagicGrid
+        const images = Array.from(grid.querySelectorAll('img'));
+        let loaded = 0;
+        function tryInitGrid() {
+          loaded++;
+          if (loaded === images.length) {
+            // Tweak: shuffle the photoFiles array for the last row to help distribute trailing images
+            const columns = 3;
+            const total = photoFiles.length;
+            const remainder = total % columns;
+            if (remainder !== 0) {
+              // Move last 'remainder' images to random columns
+              const start = total - remainder;
+              const trailing = tiles.splice(start, remainder);
+              // Shuffle trailing images
+              for (let i = trailing.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [trailing[i], trailing[j]] = [trailing[j], trailing[i]];
+              }
+              // Insert shuffled trailing images back
+              trailing.forEach((tile, idx) => {
+                grid.appendChild(tile);
+              });
+            }
+            var magicGrid = new MagicGrid({
+              container: '#magic-grid-demo',
+              static: true,
+              animate: true,
+              gutter: 30,
+              columns: columns
+            });
+            magicGrid.listen();
+          }
+        }
+        if (images.length === 0) {
+          // fallback
+          var magicGrid = new MagicGrid({
+            container: '#magic-grid-demo',
+            static: true,
+            animate: true,
+            gutter: 30,
+            columns: 3
+          });
+          magicGrid.listen();
+        } else {
+          images.forEach(img => {
+            if (img.complete) {
+              tryInitGrid();
+            } else {
+              img.addEventListener('load', tryInitGrid);
+              img.addEventListener('error', tryInitGrid);
+            }
+          });
+        }
       });
     </script>
     <script src="script.js"></script>
