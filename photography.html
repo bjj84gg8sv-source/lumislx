@@ -271,35 +271,45 @@
 
         const grid = document.getElementById('magic-grid-demo');
         grid.innerHTML = '';
-        const tiles = photoFiles.map(f => createPhotoTile(f));
-        tiles.forEach(tile => grid.appendChild(tile));
 
-        // Initialize MagicGrid and re-flow as each image's dimensions become known
-        const images = Array.from(grid.querySelectorAll('img'));
-        const magicGrid = new MagicGrid({
-          container: '#magic-grid-demo',
-          static: true,
-          animate: true,
-          gutter: 30,
-          maxColumns: 3,
-          useMin: true
-        });
-        magicGrid.listen();
+        // Preload all photos in parallel, then build the entire grid in one
+        // go and cascade-fade the tiles in top-down. This avoids any mid-load
+        // layout shifts — the layout is stable from the first frame visible.
+        const preloads = photoFiles.map(filename => new Promise(resolve => {
+          const img = new Image();
+          img.onload = img.onerror = () => resolve();
+          img.src = `Assets/Photography/Photos/${filename}`;
+        }));
 
-        // Re-position the grid each time an image loads so layout stays correct
-        // even on slower (hosted) connections where images arrive at different times.
-        function reflow() {
-          if (typeof magicGrid.positionItems === 'function') {
-            magicGrid.positionItems();
-          }
-        }
-        images.forEach(img => {
-          if (img.complete && img.naturalHeight > 0) {
-            reflow();
-          } else {
-            img.addEventListener('load', reflow);
-            img.addEventListener('error', reflow);
-          }
+        Promise.all(preloads).then(() => {
+          // All photos cached — build tiles
+          const tiles = photoFiles.map(f => {
+            const tile = createPhotoTile(f);
+            const tileImg = tile.querySelector('img');
+            tileImg.style.opacity = '0';
+            tileImg.style.transition = 'opacity 0.6s ease';
+            return tile;
+          });
+          tiles.forEach(tile => grid.appendChild(tile));
+
+          // Lay out the grid (positions are final and stable from the start)
+          const magicGrid = new MagicGrid({
+            container: '#magic-grid-demo',
+            static: true,
+            animate: false,
+            gutter: 30,
+            maxColumns: 3,
+            useMin: true
+          });
+          magicGrid.listen();
+
+          // Cascade fade-in, top-down (each tile reveals 50ms after the previous)
+          tiles.forEach((tile, i) => {
+            setTimeout(() => {
+              const tileImg = tile.querySelector('img');
+              if (tileImg) tileImg.style.opacity = '1';
+            }, i * 50);
+          });
         });
       });
     </script>
