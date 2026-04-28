@@ -211,7 +211,7 @@
       // To update: add new filenames to this array in the order you want them to appear
       // Dynamically generated from directory listing
       const photoFiles = [
-        "1.JPG","2.JPG","3.jpeg","4.jpeg","5.jpeg","6.jpeg","7.JPG","8.jpg","9.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg","17.jpg","18.jpg","19.jpeg","20.jpeg","21.jpeg","22.jpeg","23.jpg","24.jpg","25.jpg"
+        "1.JPG","2.JPG","3.jpeg","4.jpeg","5.jpeg","6.jpeg","7.JPG","8.jpg","9.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg","17.jpg","18.jpg","19.jpeg","20.jpeg","21.jpeg","22.jpeg","23.jpg","24.jpg","25.jpg","26.jpg","27.jpg","28.jpg","29.jpg"
       ];
 
       // Sort numerically by filename (highest number first)
@@ -228,9 +228,8 @@
         const img = document.createElement('img');
         img.src = `Assets/Photography/Photos/${filename}`;
         img.alt = filename;
-        img.loading = 'lazy';
+        img.loading = 'eager';
         img.decoding = 'async';
-        img.setAttribute('fetchpriority', 'low');
         img.style.width = '100%';
         img.style.height = 'auto';
         img.setAttribute('draggable', 'false');
@@ -275,60 +274,32 @@
         const tiles = photoFiles.map(f => createPhotoTile(f));
         tiles.forEach(tile => grid.appendChild(tile));
 
-        // Wait for all images to load before initializing MagicGrid
+        // Initialize MagicGrid and re-flow as each image's dimensions become known
         const images = Array.from(grid.querySelectorAll('img'));
-        let loaded = 0;
-        function tryInitGrid() {
-          loaded++;
-          if (loaded === images.length) {
-            // Tweak: shuffle the photoFiles array for the last row to help distribute trailing images
-            const columns = 3;
-            const total = photoFiles.length;
-            const remainder = total % columns;
-            if (remainder !== 0) {
-              // Move last 'remainder' images to random columns
-              const start = total - remainder;
-              const trailing = tiles.splice(start, remainder);
-              // Shuffle trailing images
-              for (let i = trailing.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [trailing[i], trailing[j]] = [trailing[j], trailing[i]];
-              }
-              // Insert shuffled trailing images back
-              trailing.forEach((tile, idx) => {
-                grid.appendChild(tile);
-              });
-            }
-            var magicGrid = new MagicGrid({
-              container: '#magic-grid-demo',
-              static: true,
-              animate: true,
-              gutter: 30,
-              columns: columns
-            });
-            magicGrid.listen();
+        const magicGrid = new MagicGrid({
+          container: '#magic-grid-demo',
+          static: true,
+          animate: true,
+          gutter: 30,
+          columns: 3
+        });
+        magicGrid.listen();
+
+        // Re-position the grid each time an image loads so layout stays correct
+        // even on slower (hosted) connections where images arrive at different times.
+        function reflow() {
+          if (typeof magicGrid.positionItems === 'function') {
+            magicGrid.positionItems();
           }
         }
-        if (images.length === 0) {
-          // fallback
-          var magicGrid = new MagicGrid({
-            container: '#magic-grid-demo',
-            static: true,
-            animate: true,
-            gutter: 30,
-            columns: 3
-          });
-          magicGrid.listen();
-        } else {
-          images.forEach(img => {
-            if (img.complete) {
-              tryInitGrid();
-            } else {
-              img.addEventListener('load', tryInitGrid);
-              img.addEventListener('error', tryInitGrid);
-            }
-          });
-        }
+        images.forEach(img => {
+          if (img.complete && img.naturalHeight > 0) {
+            reflow();
+          } else {
+            img.addEventListener('load', reflow);
+            img.addEventListener('error', reflow);
+          }
+        });
       });
     </script>
     <script src="script.js"></script>
