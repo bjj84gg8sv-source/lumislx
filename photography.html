@@ -53,7 +53,7 @@
     .magic-grid-demo {
       width: 100%;
       max-width: 1400px;
-      margin: 60px auto 0 auto;
+      margin: 60px auto 60px auto;
       position: relative;
       padding: 0;
     }
@@ -281,7 +281,8 @@
           static: true,
           animate: true,
           gutter: 30,
-          columns: 3
+          maxColumns: 3,
+          useMin: true
         });
         magicGrid.listen();
 
